@@ -36,6 +36,11 @@ Privary features are
 - [Docs](https://kit.svelte.dev/docs/introduction)
 - [Docs (jp)](https://kit.svelte.jp/docs/introduction)
 
+### Others
+
+- [Svelte + TypeScript のベストプラクティスを考える](https://zenn.dev/mizchi/scraps/a5644f129032aa)
+- [Svelte + TypeScript で軽量の JavaScript アプリを！](https://qiita.com/tronicboy/items/923fef6122ed3cf7031f)
+
 ## Setup
 
 ```
@@ -49,3 +54,12 @@ npm run dev
 npm init vite my-app2 -- --template svelte
 cd my-app2
 ```
+
+## Configuration
+
+### svelte.config.js
+
+- [Svelete Configuration](https://kit.svelte.dev/docs/configuration)
+- [Svelete Configuration (jp)](https://kit.svelte.jp/docs/configuration)
+
+## build tool

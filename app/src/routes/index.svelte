@@ -1,0 +1,41 @@
+<script>
+	import ChainID from '../components/ChainID.svelte';
+	import SignArbitrary from '../components/SignArbitrary.svelte';
+	import SignDirect from '../components/SignDirect.svelte';
+	import Clients from '../components/Clients.svelte';
+	import { onMount } from 'svelte';
+
+	// https://svelte.dev/tutorial/onmount
+	// - onMount, which runs after the component is first rendered to the DOM
+	// https://newbedev.com/referenceerror-document-is-not-defined-in-svelte-3
+	onMount(() => {
+		//document.addEventListener('DOMContentLoaded', init);
+		if (!window.getOfflineSigner || !window.keplr) {
+			alert('Please install keplr extension');
+		} else {
+			console.log('keplr extension is already installed');
+		}
+	});
+</script>
+
+<svelte:head>
+	<!-- CSS only -->
+	<link
+		href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+		rel="stylesheet"
+		integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+		crossorigin="anonymous"
+	/>
+</svelte:head>
+
+<div>
+	<h3 class="text-bg-primary p-3">Keplr Wallet</h3>
+	<!-- ChainID component -->
+	<ChainID />
+	<!-- SignArbitrary component -->
+	<SignArbitrary />
+	<!-- SignDirect component -->
+	<SignDirect />
+	<!-- Clients component -->
+	<Clients />
+</div>
