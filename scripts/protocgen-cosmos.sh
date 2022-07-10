@@ -23,9 +23,10 @@ mkdir -p ${OUT_DIR}
    --ts_proto_out="$OUT_DIR" \
    --proto_path="$COSMOS_PROTO_DIR" \
    --proto_path="$THIRD_PARTY_PROTO_DIR" \
-   --ts_proto_opt="esModuleInterop=true,forceLong=long,useOptionals=all,outputTypeRegistry=true,importSuffix=.js" \
+   --ts_proto_opt="esModuleInterop=true,forceLong=long,useOptionals=all,outputTypeRegistry=true" \
    $(find "${dir}" -maxdepth 1 -name '*.proto')
  done
+# ,importSuffix=.js
 
 # for related third party
  protoc \
@@ -44,17 +45,23 @@ mkdir -p ${OUT_DIR}
    "$THIRD_PARTY_PROTO_DIR/tendermint/types/validator.proto" \
    "$THIRD_PARTY_PROTO_DIR/tendermint/version/types.proto"
 
-mkdir -p ./app/src/codec/cosmos
-
-rm -rf ./app/src/codec/cosmos/tx \
+rm -rf ./app/src/codec/cosmos
+mkdir -p ./app/src/codec/cosmos/tx \
   ./app/src/codec/cosmos/crypto \
   ./app/src/codec/cosmos/base \
   ./app/src/codec/cosmos/upgrade
 
-mv ${OUT_DIR}cosmos/tx ./app/src/codec/cosmos/
-mv ${OUT_DIR}cosmos/crypto ./app/src/codec/cosmos/
-mv ${OUT_DIR}cosmos/base ./app/src/codec/cosmos/
-mv ${OUT_DIR}cosmos/upgrade ./app/src/codec/cosmos/
+
+# mv ${OUT_DIR}cosmos/tx ./app/src/codec/cosmos/
+# mv ${OUT_DIR}cosmos/crypto ./app/src/codec/cosmos/
+# mv ${OUT_DIR}cosmos/base ./app/src/codec/cosmos/
+# mv ${OUT_DIR}cosmos/upgrade ./app/src/codec/cosmos/
+
+mkdir -p ./app/src/codec/cosmos/base/v1beta1/; mv ${OUT_DIR}cosmos/base/v1beta1/coin.ts $_
+mkdir -p ./app/src/codec/cosmos/upgrade/v1beta1/; mv ${OUT_DIR}cosmos/upgrade/v1beta1/upgrade.ts $_
+mkdir -p ./app/src/codec/cosmos/tx/v1beta1/; mv ${OUT_DIR}cosmos/tx/v1beta1/tx.ts $_
+mkdir -p ./app/src/codec/cosmos/tx/signing/v1beta1/; mv ${OUT_DIR}cosmos/tx/signing/v1beta1/signing.ts $_
+mkdir -p ./app/src/codec/cosmos/crypto/multisig/v1beta1/; mv ${OUT_DIR}cosmos/crypto/multisig/v1beta1/multisig.ts $_
 
 # Remove unnecessary codec files
 rm -rf ./tmp

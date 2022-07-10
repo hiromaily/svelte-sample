@@ -15,6 +15,10 @@ dev-open:
 #   - `npm i @types/long` doesn't work
 PHONY: build
 build:
+	npm run build
+
+PHONY: build-node
+build-node:
 	NODE_OPTIONS='--es-module-specifier-resolution=node' npm run build
 
 # https://formulae.brew.sh/cask/ngrok

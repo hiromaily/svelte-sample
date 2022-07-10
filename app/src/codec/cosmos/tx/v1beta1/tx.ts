@@ -1,15 +1,16 @@
 /* eslint-disable */
 import { messageTypeRegistry } from "../../../typeRegistry";
-import { Any } from "../../../google/protobuf/any.js";
+import { Any } from "../../../google/protobuf/any";
 import {
   SignMode,
   signModeFromJSON,
   signModeToJSON,
-} from "../signing/v1beta1/signing.js";
-import { CompactBitArray } from "../../crypto/multisig/v1beta1/multisig.js";
+} from "../signing/v1beta1/signing";
+import { CompactBitArray } from "../../crypto/multisig/v1beta1/multisig";
 import Long from "long";
-import { Coin } from "../../base/v1beta1/coin.js";
-import * as _m0 from "protobufjs/minimal";
+import { Coin } from "../../base/v1beta1/coin";
+//import * as _m0 from "protobufjs/minimal.js";
+import _m0 from "protobufjs/minimal.js";
 
 export const protobufPackage = "cosmos.tx.v1beta1";
 

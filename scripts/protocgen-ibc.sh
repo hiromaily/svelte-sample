@@ -20,17 +20,21 @@ for dir in $proto_dirs; do
   --ts_proto_out="${OUT_DIR}" \
   --proto_path="$PROTO_DIR" \
   --proto_path="$THIRD_PARTY_PROTO_DIR" \
-  --ts_proto_opt="esModuleInterop=true,forceLong=long,useOptionals=all,outputTypeRegistry=true,importSuffix=.js" \
+  --ts_proto_opt="esModuleInterop=true,forceLong=long,useOptionals=all,outputTypeRegistry=true" \
   $(find "${dir}" -maxdepth 1 -name '*.proto')
 done
+#,importSuffix=.js
 
 # sed -i -e 's/..\/typeRegistry/@src\/codec\/typeRegistry/' ${OUT_DIR}app/types.ts
 # sed -i -e 's/..\/typeRegistry/@src\/codec\/typeRegistry/' ${OUT_DIR}commitment/types.ts
 
 rm -rf ./app/src/codec/ibc
-
 mkdir -p ./app/src/codec/ibc
-mv ${OUT_DIR}ibc ./app/src/codec/
+
+
+#mv ${OUT_DIR}ibc ./app/src/codec/
+mkdir -p ./app/src/codec/ibc/core/client/v1/; mv ${OUT_DIR}ibc/core/client/v1/client.ts $_
+mkdir -p ./app/src/codec/ibc/applications/transfer/v1/; mv ${OUT_DIR}ibc/applications/transfer/v1/tx.ts $_
 
 # Remove unnecessary codec files
 rm -rf ./tmp

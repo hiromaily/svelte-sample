@@ -1,6 +1,7 @@
 /* eslint-disable */
-import * as _m0 from 'protobufjs/minimal';
-import Long from 'long';
+//import type * as _m0 from 'protobufjs/minimal.js';
+import type _m0 from "protobufjs/minimal.js";
+import type Long from 'long';
 
 export interface MessageType<Message extends UnknownMessage = UnknownMessage> {
 	$type: Message['$type'];

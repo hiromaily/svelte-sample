@@ -1,5 +1,6 @@
-import * as Long from 'long';
-import { Coin } from '$codec/cosmos/base/v1beta1/coin';
+//import * as Long from 'long';
+import Long from "long";
+import type { Coin } from '$codec/cosmos/base/v1beta1/coin';
 import { Height } from '$codec/ibc/core/client/v1/client';
 import { MsgTransfer } from '$codec/ibc/applications/transfer/v1/tx';
 import { Any } from '$codec/google/protobuf/any';
