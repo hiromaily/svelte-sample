@@ -27,7 +27,7 @@ const config = {
 		},
 		// deploy to https://hiromaily.github.io/svelte-sample/
 		paths: {
-			base: '/svelte-sample'
+			base: '/svelte-sample/web'
 		},
 		alias: {
 			$components: 'src/components',
