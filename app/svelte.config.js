@@ -29,6 +29,7 @@ const config = {
 		paths: {
 			base: '/svelte-sample/web'
 		},
+		appDir: 'app',
 		alias: {
 			$components: 'src/components',
 			$codec: 'src/codec'

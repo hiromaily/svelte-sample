@@ -26,4 +26,7 @@ PHONY: deploy-gitpage
 deploy-gitpage:
 	rm -rf ../web/index.html ../web/app
 	cp -r build/ ../web/
-	mv ../web/_app ../web/app
+
+PHONY: clean
+clean:
+	rm -rf build
