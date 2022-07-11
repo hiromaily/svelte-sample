@@ -1,7 +1,7 @@
 # Svelte-sample
 
 - [app directory](./app/)
-- [hosted site](https://hiromaily.github.io/svelte-sample/)
+- [hosted site](https://hiromaily.github.io/svelte-sample/web/)
 
 ## About Svelte
 
