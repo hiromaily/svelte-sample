@@ -20,5 +20,8 @@ PHONY: build-node
 build-node:
 	NODE_OPTIONS='--es-module-specifier-resolution=node' npm run build
 
+# github page: https://hiromaily.github.io/svelte-sample/
+PHONY: deploy-gitpage
 deploy-gitpage:
+	rm -rf ../docs/index.html ../docs/_app
 	cp -r build/ ../docs/

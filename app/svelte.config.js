@@ -26,7 +26,7 @@ const config = {
       default: true
     },
 		paths: {
-			base: 'svelte-sample/app/build',
+			base: '/svelte-sample',
 	  },		
 		alias: {
 			$components: 'src/components',
