@@ -25,10 +25,11 @@ const config = {
 			// This can be false if you're using a fallback (i.e. SPA mode)
 			default: true
 		},
-		// deploy to https://hiromaily.github.io/svelte-sample/
+		// deploy to https://hiromaily.github.io/svelte-sample/web/
 		paths: {
 			base: '/svelte-sample/web'
 		},
+		// after `vite build`
 		appDir: 'app',
 		alias: {
 			$components: 'src/components',
