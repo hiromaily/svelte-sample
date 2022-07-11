@@ -21,6 +21,7 @@ build-node:
 	NODE_OPTIONS='--es-module-specifier-resolution=node' npm run build
 
 # github page: https://hiromaily.github.io/svelte-sample/web/
+# replace `_app` from js file as well
 PHONY: deploy-gitpage
 deploy-gitpage:
 	rm -rf ../web/index.html ../web/app
