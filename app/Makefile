@@ -23,5 +23,6 @@ build-node:
 # github page: https://hiromaily.github.io/svelte-sample/web/
 PHONY: deploy-gitpage
 deploy-gitpage:
-	rm -rf ../web/index.html ../web/_app
+	rm -rf ../web/index.html ../web/app
 	cp -r build/ ../web/
+	mv ../web/_app ../web/app
