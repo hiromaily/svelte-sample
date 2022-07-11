@@ -25,9 +25,9 @@ const config = {
       // This can be false if you're using a fallback (i.e. SPA mode)
       default: true
     },
-		paths: {
-			base: '/svelte-sample',
-	  },		
+		// paths: {
+		// 	base: '/svelte-sample',
+	  // },		
 		alias: {
 			$components: 'src/components',
 			$codec: 'src/codec'
