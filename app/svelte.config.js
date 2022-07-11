@@ -12,23 +12,23 @@ const config = {
 	// },
 	kit: {
 		//adapter: adapter(),
-    adapter: adapter({
+		adapter: adapter({
 			// for @sveltejs/adapter-static
-      // default options are shown. On some platforms
-      // these options are set automatically — see below
-      pages: 'build',
-      assets: 'build',
-      fallback: null,
-      precompress: false
-    }),
-    prerender: {
-      // This can be false if you're using a fallback (i.e. SPA mode)
-      default: true
-    },
+			// default options are shown. On some platforms
+			// these options are set automatically — see below
+			pages: 'build',
+			assets: 'build',
+			fallback: null,
+			precompress: false
+		}),
+		prerender: {
+			// This can be false if you're using a fallback (i.e. SPA mode)
+			default: true
+		},
 		// deploy to https://hiromaily.github.io/svelte-sample/
 		paths: {
-			base: '/svelte-sample',
-	  },		
+			base: '/svelte-sample'
+		},
 		alias: {
 			$components: 'src/components',
 			$codec: 'src/codec'

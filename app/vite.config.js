@@ -6,29 +6,29 @@ import { sveltekit } from '@sveltejs/kit/vite';
 /** @type {import('vite').UserConfig} */
 const config = {
 	plugins: [
-		sveltekit(), 
+		sveltekit()
 		// resolve({
 		//   extensions: ['.js', '.ts']
-    // })
-    // alias({
-    //   entries: [
-    //     {
-    //       find: new RegExp('protobufjs/minimal.js$'),
-    //       replacement: "protobufjs/dist/minimal/protobuf.min.js"
-    //     }
-    //   ]
-    // })		
-  ],
-  build: {
-    rollupOptions: {
+		// })
+		// alias({
+		//   entries: [
+		//     {
+		//       find: new RegExp('protobufjs/minimal.js$'),
+		//       replacement: "protobufjs/dist/minimal/protobuf.min.js"
+		//     }
+		//   ]
+		// })
+	],
+	build: {
+		rollupOptions: {
 			output: {
-				interop: "auto"
+				interop: 'auto'
 			}
-    }
-	},	
+		}
+	},
 	// resolve: {
-  //   extensions: ['.js', '.ts'],
-  // },	
+	//   extensions: ['.js', '.ts'],
+	// },
 	define: {
 		global: {}
 	}
