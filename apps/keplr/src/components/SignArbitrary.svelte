@@ -22,8 +22,8 @@
 
 	// updateAddress() must run after chainID updated
 	const updateAddress = async (chainID: string) => {
-		await window.keplr.enable(chainID);
-		const offlineSigner = window.getOfflineSigner(chainID);
+		await Window.keplr.enable(chainID);
+		const offlineSigner = Window.getOfflineSigner(chainID);
 		const account = (await offlineSigner.getAccounts())[0];
 		//console.log('account:', account);
 		address = account.address;
@@ -32,7 +32,7 @@
 	// refer to https://github.com/chainapsis/keplr-example/blob/master/src/main.js
 	const sign = () => {
 		// check extension
-		if (!window.getOfflineSigner || !window.keplr) {
+		if (!Window.getOfflineSigner || !Window.keplr) {
 			alert('Please install keplr extension');
 			return;
 		}
@@ -50,7 +50,7 @@
 
 			// refer to
 			// https://github.com/johnletey/cosmos-signatures/blob/6d7ab6d8c9b3956e72aae5456632aa24c4aa1fdd/src/pages/index.tsx
-			const res = await window.keplr.signArbitrary(chainId, address, msg);
+			const res = await Window.keplr.signArbitrary(chainId, address, msg);
 			signature = res.signature;
 		})();
 	};

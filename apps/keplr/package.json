@@ -4,13 +4,13 @@
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
-		"build-typecheck": "tsc --noEmit && vite build",
+		"build-typecheck": "npm run type-check && npm run build",
 		"package": "svelte-kit package",
 		"preview": "vite preview",
 		"prepare": "svelte-kit sync",
 		"check": "svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",
-		"lint": "prettier --check --plugin-search-dir=. . && eslint .",
+		"lint": "npm run format && prettier --check --plugin-search-dir=. . && eslint . && npm run type-check",
 		"format": "prettier --write --plugin-search-dir=. .",
 		"type-check": "tsc --noEmit"
 	},

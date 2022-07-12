@@ -1,8 +1,9 @@
-import { SigningCosmosClient, OfflineSigner as OfflineAminoSigner } from '@cosmjs/launchpad';
-import { OfflineSigner } from '@cosmjs/proto-signing';
-import { OfflineSigner as KeplrOfflineSigner } from '@keplr-wallet/types';
+import { SigningCosmosClient } from '@cosmjs/launchpad';
+import type { OfflineSigner as OfflineAminoSigner } from '@cosmjs/launchpad';
+import type { OfflineSigner } from '@cosmjs/proto-signing';
 import { SigningStargateClient } from '@cosmjs/stargate';
 import { BroadcastMode, SigningCosmWasmClient } from 'secretjs';
+import type { OfflineSigner as KeplrOfflineSigner } from 'secretjs/types/wallet';
 
 export const createCosmosClient = (
 	address: string,
@@ -50,7 +51,7 @@ export const createCosmWasmClient = (
 		address,
 		offlineSigner,
 		Window.getEnigmaUtils(chainId),
-		null,
+		undefined,
 		BroadcastMode.Sync
 	);
 	return client;

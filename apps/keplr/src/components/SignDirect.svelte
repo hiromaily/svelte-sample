@@ -26,8 +26,8 @@
 
 	// updateAddress() must run after chainID updated
 	const updateAddress = async (chainID: string) => {
-		await window.keplr.enable(chainID);
-		const offlineSigner = window.getOfflineSigner(chainID);
+		await Window.keplr.enable(chainID);
+		const offlineSigner = Window.getOfflineSigner(chainID);
 		const account = (await offlineSigner.getAccounts())[0];
 		//console.log('account:', account);
 		sender = account.address;
@@ -47,7 +47,7 @@
 	// refer to https://github.com/chainapsis/keplr-example/blob/master/src/main.js
 	const sign = () => {
 		// check extension
-		if (!window.getOfflineSigner || !window.keplr) {
+		if (!Window.getOfflineSigner || !Window.keplr) {
 			alert('Please install keplr extension');
 			return;
 		}
@@ -60,7 +60,7 @@
 
 			const signDoc = createSignDoc(sender);
 			const signOptions = {};
-			const res = await window.keplr.signDirect(chainId, sender, signDoc, signOptions);
+			const res = await Window.keplr.signDirect(chainId, sender, signDoc, signOptions);
 			console.dir(res); //debug
 			// https://stackoverflow.com/questions/69051857/svelte-referenceerror-buffer-is-not-defined
 			//signature = Buffer.from(res.signature.signature, 'base64').toString('hex');
