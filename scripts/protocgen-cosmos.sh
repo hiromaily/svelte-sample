@@ -57,11 +57,11 @@ mkdir -p ./app/src/codec/cosmos/tx \
 # mv ${OUT_DIR}cosmos/base ./app/src/codec/cosmos/
 # mv ${OUT_DIR}cosmos/upgrade ./app/src/codec/cosmos/
 
-mkdir -p ./app/src/codec/cosmos/base/v1beta1/; mv ${OUT_DIR}cosmos/base/v1beta1/coin.ts $_
-mkdir -p ./app/src/codec/cosmos/upgrade/v1beta1/; mv ${OUT_DIR}cosmos/upgrade/v1beta1/upgrade.ts $_
-mkdir -p ./app/src/codec/cosmos/tx/v1beta1/; mv ${OUT_DIR}cosmos/tx/v1beta1/tx.ts $_
-mkdir -p ./app/src/codec/cosmos/tx/signing/v1beta1/; mv ${OUT_DIR}cosmos/tx/signing/v1beta1/signing.ts $_
-mkdir -p ./app/src/codec/cosmos/crypto/multisig/v1beta1/; mv ${OUT_DIR}cosmos/crypto/multisig/v1beta1/multisig.ts $_
+mkdir -p ./apps/keplr/src/codec/cosmos/base/v1beta1/; mv ${OUT_DIR}cosmos/base/v1beta1/coin.ts $_
+mkdir -p ./apps/keplr/src/codec/cosmos/upgrade/v1beta1/; mv ${OUT_DIR}cosmos/upgrade/v1beta1/upgrade.ts $_
+mkdir -p ./apps/keplr/src/codec/cosmos/tx/v1beta1/; mv ${OUT_DIR}cosmos/tx/v1beta1/tx.ts $_
+mkdir -p ./apps/keplr/src/codec/cosmos/tx/signing/v1beta1/; mv ${OUT_DIR}cosmos/tx/signing/v1beta1/signing.ts $_
+mkdir -p ./apps/keplr/src/codec/cosmos/crypto/multisig/v1beta1/; mv ${OUT_DIR}cosmos/crypto/multisig/v1beta1/multisig.ts $_
 
 # Remove unnecessary codec files
 rm -rf ./tmp

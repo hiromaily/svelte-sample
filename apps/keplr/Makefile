@@ -24,8 +24,8 @@ build-node:
 # replace `_app` from js file as well
 PHONY: deploy-gitpage
 deploy-gitpage:
-	rm -rf ../web/index.html ../web/app
-	cp -r build/ ../web/
+	rm -rf ../../web/keplr/index.html ../../web/keplr/app
+	cp -r build/ ../../web/keplr/
 
 PHONY: clean
 clean:

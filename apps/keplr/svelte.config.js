@@ -27,7 +27,7 @@ const config = {
 		},
 		// deploy to https://hiromaily.github.io/svelte-sample/web/
 		paths: {
-			base: '/svelte-sample/web'
+			base: '/svelte-sample/web/keplr'
 		},
 		// after `vite build`
 		appDir: 'app',
