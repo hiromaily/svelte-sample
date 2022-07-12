@@ -26,6 +26,7 @@ const config = {
 			default: true
 		},
 		// deploy to https://hiromaily.github.io/svelte-sample/web/
+		// FIXME: wanna use it only `vite build`, not `vite dev`
 		paths: {
 			base: '/wallet-demo-using-svelte/web/keplr'
 		},

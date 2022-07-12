@@ -27,8 +27,8 @@
 
 	// updateAddress() must run after chainID updated
 	const updateAddress = async (chainID: string) => {
-		await window.keplr.enable(chainID);
-		const offlineSigner = window.getOfflineSigner(chainID);
+		await Window.keplr.enable(chainID);
+		const offlineSigner = Window.getOfflineSigner(chainID);
 		const account = (await offlineSigner.getAccounts())[0];
 		address = account.address;
 

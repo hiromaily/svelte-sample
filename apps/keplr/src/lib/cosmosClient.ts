@@ -1,8 +1,13 @@
-import { SigningCosmosClient } from '@cosmjs/launchpad';
+import { SigningCosmosClient, OfflineSigner as OfflineAminoSigner } from '@cosmjs/launchpad';
+import { OfflineSigner } from '@cosmjs/proto-signing';
+import { OfflineSigner as KeplrOfflineSigner } from '@keplr-wallet/types';
 import { SigningStargateClient } from '@cosmjs/stargate';
 import { BroadcastMode, SigningCosmWasmClient } from 'secretjs';
 
-export const createCosmosClient = (address: string, offlineSigner: any): SigningCosmosClient => {
+export const createCosmosClient = (
+	address: string,
+	offlineSigner: OfflineAminoSigner
+): SigningCosmosClient => {
 	const lcd = 'https://lcd-cosmoshub.keplr.app/rest';
 	// client
 	// refer to
@@ -13,7 +18,7 @@ export const createCosmosClient = (address: string, offlineSigner: any): Signing
 
 export const createStargateClient = async (
 	address: string,
-	offlineSigner: any
+	offlineSigner: OfflineSigner
 ): Promise<SigningStargateClient> => {
 	// refer to https://github.com/cosmos/awesome/issues/17
 	//const lcd = 'https://cosmoshub.validator.network/';
@@ -32,7 +37,7 @@ export const createStargateClient = async (
 
 export const createCosmWasmClient = (
 	address: string,
-	offlineSigner: any,
+	offlineSigner: KeplrOfflineSigner,
 	chainId: string
 ): SigningCosmWasmClient => {
 	const lcd = 'https://lcd-secret.keplr.app/rest';
@@ -43,9 +48,8 @@ export const createCosmWasmClient = (
 	const client = new SigningCosmWasmClient(
 		lcd,
 		address,
-		//@ts-ignore
 		offlineSigner,
-		window.getEnigmaUtils(chainId),
+		Window.getEnigmaUtils(chainId),
 		null,
 		BroadcastMode.Sync
 	);
