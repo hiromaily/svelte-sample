@@ -6,7 +6,7 @@
 
 ## sites
 
-- [keplr wallet on the web](https://hiromaily.github.io/svelte-sample/web/keplr/)
+- [keplr wallet on the web](https://hiromaily.github.io/wallet-demo-using-svelte/web/keplr/)
 
 ## About Svelte
 

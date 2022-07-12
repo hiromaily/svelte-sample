@@ -27,7 +27,7 @@ const config = {
 		},
 		// deploy to https://hiromaily.github.io/svelte-sample/web/
 		paths: {
-			base: '/svelte-sample/web/keplr'
+			base: '/wallet-demo-using-svelte/web/keplr'
 		},
 		// after `vite build`
 		appDir: 'app',
