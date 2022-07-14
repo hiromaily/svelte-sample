@@ -9,11 +9,13 @@
 	//import { Buffer } from 'buffer';
 
 	let chainId = defaultChainID; // use writable stores with chainID, [https://svelte.dev/tutorial/writable-stores]
-	let signature = 'result';
+
+	// UI related
 	let sender = '';
 	let receiver = 'cosmos1ca0zlqxjqv5gek5qxm602umtkmu88564hpyws4'; // just dummy data
 	let sourcePort = 'transfer';
 	let sourceChannel = 'channel-0';
+	let signature = 'result';
 
 	// initialization
 	onMount(async () => {
@@ -68,11 +70,11 @@
 
 	<div class="mx-3">
 		<div class="row">
-			<label for="inputSender" class="col-sm-3 col-form-label">Sender:</label>
+			<label for="inputSender" class="col-sm-3 col-form-label">Sender (Keplr address):</label>
 			<div class="col-sm-9">
 				<input type="text" class="form-control" id="inputSender" value={sender} readonly />
 			</div>
-			<label for="inputReceiver" class="col-sm-3 col-form-label">Receiver:</label>
+			<label for="inputReceiver" class="col-sm-3 col-form-label">Receiver (dummy):</label>
 			<div class="col-sm-9">
 				<input type="text" class="form-control" id="inputReceiver" value={receiver} />
 			</div>

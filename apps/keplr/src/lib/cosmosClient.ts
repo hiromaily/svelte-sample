@@ -16,7 +16,7 @@ export const createCosmosClient = (
 	// - https://www.npmjs.com/package/@cosmjs/launchpad?activeTab=readme
 	// issue:
 	// - https://github.com/cosmos/cosmjs/issues/702
-  // - https://github.com/cosmos/cosmjs/issues/940
+	// - https://github.com/cosmos/cosmjs/issues/940
 	return new SigningCosmosClient(lcd, address, offlineSigner);
 };
 

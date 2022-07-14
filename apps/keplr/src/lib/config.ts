@@ -17,5 +17,5 @@ export const lcdSigningCosmosClient = 'http://localhost:1317';
 //export const lcdSigningStargateClient = 'https://stargate.cosmos.network/';
 export const lcdSigningStargateClient = 'http://localhost:26657';
 
-
-
+export const defaultMnemonic =
+	'path tourist guilt wide flat sign sort same rather option uniform doll animal later thrive alert usual random hollow sell baby video young foster';

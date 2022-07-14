@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { fromBase64 } from '@cosmjs/encoding';
+	//import { fromBase64 } from '@cosmjs/encoding';
 	import { updateAddress } from '$lib/address';
 	import { defaultChainID } from '$lib/config';
 	import { storeChainID } from '$lib/store';
@@ -10,8 +10,9 @@
 	// import { SigningStargateClient } from '@cosmjs/stargate';
 
 	let chainId = defaultChainID; // use writable stores with chainID [https://svelte.dev/tutorial/writable-stores]
-	let signature = 'result';
 	let address = '';
+	// UI related
+	let signature = 'result';
 
 	// initialization
 	onMount(async () => {
@@ -26,7 +27,7 @@
 	});
 
 	// refer to https://github.com/chainapsis/keplr-example/blob/master/src/main.js
-	const sign = () => {
+	const clickSign = () => {
 		// check extension
 		if (!window.getOfflineSigner || !window.keplr) {
 			alert('Please install keplr extension');
@@ -63,7 +64,7 @@
 			<label for="message">message</label>
 			<div class="mt-2">
 				<button
-					on:click={sign}
+					on:click={clickSign}
 					type="button"
 					class="btn btn-primary"
 					name="send"
