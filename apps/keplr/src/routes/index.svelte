@@ -1,22 +1,22 @@
 <script lang="ts">
-	import { Window as KeplrWindow } from '@keplr-wallet/types';
-	import ChainID from '../components/ChainID.svelte';
-	import SignArbitrary from '../components/SignArbitrary.svelte';
-	import SignDirect from '../components/SignDirect.svelte';
-	import Clients from '../components/Clients.svelte';
+	//import { Window as KeplrWindow } from '@keplr-wallet/types';
+	import ChainID from '$components/ChainID.svelte';
+	import SignArbitrary from '$components/SignArbitrary.svelte';
+	import SignDirect from '$components/SignDirect.svelte';
+	import Clients from '$components/Clients.svelte';
 	import { onMount } from 'svelte';
 
-	declare global {
-		// eslint-disable-next-line @typescript-eslint/no-empty-interface
-		interface Window extends KeplrWindow {}
-	}
+	// declare global {
+	// 	// eslint-disable-next-line @typescript-eslint/no-empty-interface
+	// 	interface Window extends KeplrWindow {}
+	// }
 
 	// https://svelte.dev/tutorial/onmount
 	// - onMount, which runs after the component is first rendered to the DOM
 	// https://newbedev.com/referenceerror-document-is-not-defined-in-svelte-3
 	onMount(() => {
 		//document.addEventListener('DOMContentLoaded', init);
-		if (!Window.getOfflineSigner || !Window.keplr) {
+		if (!window.getOfflineSigner || !window.keplr) {
 			alert('Please install keplr extension');
 		} else {
 			console.log('keplr extension is already installed');
@@ -34,7 +34,7 @@
 	/>
 </svelte:head>
 
-<div>
+<div class="mb-5">
 	<h3 class="text-bg-primary p-3">Keplr Wallet</h3>
 	<!-- ChainID component -->
 	<ChainID />

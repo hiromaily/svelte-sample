@@ -5,35 +5,36 @@ import { SigningStargateClient } from '@cosmjs/stargate';
 import { BroadcastMode, SigningCosmWasmClient } from 'secretjs';
 import type { OfflineSigner as KeplrOfflineSigner } from 'secretjs/types/wallet';
 
+// deprecated
 export const createCosmosClient = (
+	lcd: string,
 	address: string,
 	offlineSigner: OfflineAminoSigner
 ): SigningCosmosClient => {
-	const lcd = 'https://lcd-cosmoshub.keplr.app/rest';
-	// client
 	// refer to
 	// - https://github.com/chainapsis/keplr-wallet/blob/master/docs/api/cosmjs.md#connecting-with-cosmjs
 	// - https://www.npmjs.com/package/@cosmjs/launchpad?activeTab=readme
+	// issue:
+	// - https://github.com/cosmos/cosmjs/issues/702
+  // - https://github.com/cosmos/cosmjs/issues/940
 	return new SigningCosmosClient(lcd, address, offlineSigner);
 };
 
 export const createStargateClient = async (
-	address: string,
+	lcd: string,
 	offlineSigner: OfflineSigner
-): Promise<SigningStargateClient> => {
-	// refer to https://github.com/cosmos/awesome/issues/17
-	//const lcd = 'https://cosmoshub.validator.network/';
-	//const lcd = 'https://rpc.cosmos.network:26657';
-	//const lcd = 'https://stargate.cosmos.network/';
-	const lcd = 'http://localhost:26657';
-
-	// client
+): Promise<SigningStargateClient | undefined> => {
 	// refer to
 	// - https://github.com/cosmos/cosmjs/blob/main/packages/stargate/src/signingstargateclient.spec.ts
 	// - https://github.com/gitshock-labs/terra-bridge-dex/blob/091fe2705c9ed39b47648df2ff283c34cbdcb8cb/src/services/keplrService.ts
-	const stargateClient = await SigningStargateClient.connectWithSigner(lcd, offlineSigner);
+	try {
+		const stargateClient = await SigningStargateClient.connectWithSigner(lcd, offlineSigner);
+		return stargateClient;
+	} catch (e) {
+		console.log(e);
+	}
 
-	return stargateClient;
+	return undefined;
 };
 
 export const createCosmWasmClient = (
@@ -50,7 +51,7 @@ export const createCosmWasmClient = (
 		lcd,
 		address,
 		offlineSigner,
-		Window.getEnigmaUtils(chainId),
+		window.getEnigmaUtils!(chainId),
 		undefined,
 		BroadcastMode.Sync
 	);

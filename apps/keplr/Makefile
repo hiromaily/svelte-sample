@@ -13,11 +13,11 @@ dev-open:
 	npm run dev -- --open
 
 PHONY: build
-build:
+build: clean
 	npm run build
 
 PHONY: build-node
-build-node:
+build-node: clean
 	NODE_OPTIONS='--es-module-specifier-resolution=node' npm run build
 
 # github page: https://hiromaily.github.io/svelte-sample/web/

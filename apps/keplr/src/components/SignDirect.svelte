@@ -1,37 +1,31 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { SignDoc } from '$codec/cosmos/tx/v1beta1/tx';
+	import type { SignDoc } from '$codec/cosmos/tx/v1beta1/tx';
 	import { Coin } from '$codec/cosmos/base/v1beta1/coin';
-	import { newMsgTransfer, buildSignDocWithMsgTransfer } from '$lib/msg';
-	import { storeChainID } from '$lib/store';
+	import { updateAddress } from '$lib/address';
 	import { defaultChainID } from '$lib/config';
+	import { storeChainID } from '$lib/store';
+	import { newMsgTransfer, buildSignDocWithMsgTransfer } from '$lib/msg';
 	//import { Buffer } from 'buffer';
 
 	let chainId = defaultChainID; // use writable stores with chainID, [https://svelte.dev/tutorial/writable-stores]
-	storeChainID.subscribe((value) => {
-		chainId = value;
-		// updateAddress(chainId);
-	});
-
 	let signature = 'result';
 	let sender = '';
-	let receiver = 'cosmos1ca0zlqxjqv5gek5qxm602umtkmu88564hpyws4';
+	let receiver = 'cosmos1ca0zlqxjqv5gek5qxm602umtkmu88564hpyws4'; // just dummy data
 	let sourcePort = 'transfer';
 	let sourceChannel = 'channel-0';
 
 	// initialization
 	onMount(async () => {
-		await updateAddress(chainId);
+		//sender = await updateAddress(chainId);
+		storeChainID.subscribe((value) => {
+			chainId = value;
+			// update address
+			updateAddress(chainId).then((res) => {
+				sender = res.address;
+			});
+		});
 	});
-
-	// updateAddress() must run after chainID updated
-	const updateAddress = async (chainID: string) => {
-		await Window.keplr.enable(chainID);
-		const offlineSigner = Window.getOfflineSigner(chainID);
-		const account = (await offlineSigner.getAccounts())[0];
-		//console.log('account:', account);
-		sender = account.address;
-	};
 
 	const createSignDoc = (sender: string): SignDoc => {
 		const token: Coin = {
@@ -47,7 +41,7 @@
 	// refer to https://github.com/chainapsis/keplr-example/blob/master/src/main.js
 	const sign = () => {
 		// check extension
-		if (!Window.getOfflineSigner || !Window.keplr) {
+		if (!window.getOfflineSigner || !window.keplr) {
 			alert('Please install keplr extension');
 			return;
 		}
@@ -60,7 +54,7 @@
 
 			const signDoc = createSignDoc(sender);
 			const signOptions = {};
-			const res = await Window.keplr.signDirect(chainId, sender, signDoc, signOptions);
+			const res = await window.keplr.signDirect(chainId, sender, signDoc, signOptions);
 			console.dir(res); //debug
 			// https://stackoverflow.com/questions/69051857/svelte-referenceerror-buffer-is-not-defined
 			//signature = Buffer.from(res.signature.signature, 'base64').toString('hex');

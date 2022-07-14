@@ -5,8 +5,30 @@ services:
     container_name: tendermint-chain
     image: tendermint/tendermint:v0.34.19 #v0.35.7
     ports:
+      #- 1317:1317
       - 26656:26656
       - 26657:26657
       - 26660:26660
     volumes:
       - ./tendermint:/tendermint
+
+  # https://github.com/cosmos/cosmos-sdk/blob/main/docker-compose.yml
+  # FIXME: Error: couldn't read GenesisDoc file: open /data/node0/simd/config/genesis.json: no such file or directory
+  simdnode0:
+    container_name: simdnode0
+    image: "cosmossdk/simd"
+    environment:
+      - DEBUG=1
+      - ID=0
+      - LOG=${LOG:-simd.log}
+    cap_add:
+      - SYS_PTRACE
+    security_opt:
+      - seccomp:unconfined
+    ports:
+      - "26656-26657:26656-26657"
+      - "1317:1317"
+      - "9090:9090"
+      - "2345:2345"
+    volumes:
+      - ./testnet:/data:Z
