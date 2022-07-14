@@ -19,6 +19,7 @@
 	let amount = '100';
 	let denom = 'samoleans';
 	let resSendToken = '';
+	let receiverBalance = '';
 
 	// initialization
 	onMount(async () => {
@@ -51,12 +52,12 @@
 	// };
 
 	const clickMnemonic = async () => {
-		const mnem = document.getElementById('inputMnemonic').value;
-		if (mnem === '') {
+		//const mnem = document.getElementById('inputMnemonic').value;
+		if (mnemonic === '') {
 			alert('Please input Mnemonic');
 			return;
 		}
-		const wallet = await getWallet(mnem);
+		const wallet = await getWallet(mnemonic);
 		const accounts = await wallet.getAccounts();
 		console.log('accounts:', accounts);
 		if (accounts && accounts.length > 0) {
@@ -80,7 +81,6 @@
 			denom: denom,
 			amount: amount
 		};
-		// send token
 		// sendTokens(
 		// 	senderAddress: string,
 		//  recipientAddress: string,
@@ -96,19 +96,22 @@
 			gas: '450000'
 		};
 		const res = await stargateClient.sendTokens(mnemonicAddr, receiverAddr, [amountDenom], fee);
-		// export interface DeliverTxResponse {
-		//   readonly height: number;
-		//   /** Error code. The transaction suceeded iff code is 0. */
-		//   readonly code: number;
-		//   readonly transactionHash: string;
-		//   readonly rawLog?: string;
-		//   readonly data?: readonly MsgData[];
-		//   readonly gasUsed: number;
-		//   readonly gasWanted: number;
-		// }
 		console.log(res);
 		resSendToken = JSON.stringify(res, null, 2);
+
+		// receiver balance
+		const balance = await stargateClient.getBalance(receiverAddr, denom);
+		receiverBalance = balance.amount;
 	};
+
+	// const clickBalance = async () => {
+	// 	if (!stargateClient) {
+	// 		alert('SigningStargateClient can not be created');
+	// 		return;
+	// 	}
+	// 	const res = await stargateClient.getBalance(receiverAddr, denom);
+	// 	console.log(res);
+	// };
 </script>
 
 <div class="mx-3 mt-4">
@@ -165,7 +168,7 @@
 			</div>
 
 			<div class="input-group">
-				<label for="inputAmount" class="col-sm-3 col-form-label">Amount:</label>
+				<label for="inputAmount" class="col-sm-3 col-form-label">Send Amount:</label>
 				<div class="col-sm-4">
 					<input
 						type="text"
@@ -177,13 +180,7 @@
 				</div>
 				<div class="col-sm-1" />
 				<div class="col-sm-4">
-					<input
-						type="text"
-						class="form-control input-group"
-						id="inputReceiver"
-						placeholder="Denom"
-						value={denom}
-					/>
+					<input type="text" class="form-control input-group" placeholder="Denom" value={denom} />
 				</div>
 			</div>
 
@@ -203,6 +200,32 @@
 		<div class="mt-4">
 			<h5>Result of sendToken</h5>
 			<div class="p-3 border bg-light text-muted"><pre>{resSendToken}</pre></div>
+		</div>
+
+		<div class="row mt-4">
+			<div class="input-group">
+				<label for="inputBalance" class="col-sm-3 col-form-label">Receiver Balance:</label>
+				<div class="col-sm-4">
+					<input
+						type="text"
+						class="form-control input-group"
+						id="inputBalance"
+						placeholder="Balance"
+						value={receiverBalance}
+						readonly
+					/>
+				</div>
+				<div class="col-sm-1" />
+				<div class="col-sm-4">
+					<input
+						type="text"
+						class="form-control input-group"
+						placeholder="Denom"
+						value={denom}
+						readonly
+					/>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
