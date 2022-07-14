@@ -21,7 +21,6 @@ const updateAddress = async (chainID: string): Promise<AddressSigner> => {
 
 const getWallet = async (mnemonic: string): Promise<DirectSecp256k1HdWallet> => {
 	return await DirectSecp256k1HdWallet.fromMnemonic(mnemonic);
-	//return await wallet.getAccounts();
 };
 
 export { updateAddress, getWallet };

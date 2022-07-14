@@ -18,6 +18,7 @@
 	let receiverAddr = 'cosmos127f42r0k2980u8phytr7eg2r836dn6lgjcn7yg'; // created by alpha CLI (https://github.com/datachainlab/fabric-tendermint-cross-demo)
 	let amount = '100';
 	let denom = 'samoleans';
+	let resSendToken = '';
 
 	// initialization
 	onMount(async () => {
@@ -42,15 +43,6 @@
 			console.dir(stargateClient);
 		}
 	};
-
-	// const createSigningCosmosClient = async (offlineSigner: any) => {
-	// 	//SigningCosmosClient: deprecated
-	// 	const cosmClient = createCosmosClient(lcdSigningCosmosClient, address, offlineSigner);
-	// 	console.dir(cosmClient);
-	// 	signerAddr = cosmClient.signerAddress;
-	// 	console.log(await cosmClient.getSequence(address));
-	// 	console.log(await cosmClient.getAccount(address));
-	// };
 
 	// const createSigningCosmWasmClient = async (offlineSigner: any) => {
 	// 	// SigningCosmWasmClient
@@ -99,13 +91,23 @@
 
 		// Error: Gas price must be set in the client options when auto gas is used
 		// => set `minimum-gas-prices` in app.toml
-		// Failed to retrieve account from signer
 		const fee: StdFee = {
 			amount: [],
 			gas: '450000'
 		};
 		const res = await stargateClient.sendTokens(mnemonicAddr, receiverAddr, [amountDenom], fee);
+		// export interface DeliverTxResponse {
+		//   readonly height: number;
+		//   /** Error code. The transaction suceeded iff code is 0. */
+		//   readonly code: number;
+		//   readonly transactionHash: string;
+		//   readonly rawLog?: string;
+		//   readonly data?: readonly MsgData[];
+		//   readonly gasUsed: number;
+		//   readonly gasWanted: number;
+		// }
 		console.log(res);
+		resSendToken = JSON.stringify(res, null, 2);
 	};
 </script>
 
@@ -196,6 +198,11 @@
 					Send Token
 				</button>
 			</div>
+		</div>
+
+		<div class="mt-4">
+			<h5>Result of sendToken</h5>
+			<div class="p-3 border bg-light text-muted"><pre>{resSendToken}</pre></div>
 		</div>
 	</div>
 </div>
