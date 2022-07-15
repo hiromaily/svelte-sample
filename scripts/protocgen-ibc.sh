@@ -28,11 +28,11 @@ done
 # sed -i -e 's/..\/typeRegistry/@src\/codec\/typeRegistry/' ${OUT_DIR}app/types.ts
 # sed -i -e 's/..\/typeRegistry/@src\/codec\/typeRegistry/' ${OUT_DIR}commitment/types.ts
 
-rm -rf ./app/src/codec/ibc
-mkdir -p ./app/src/codec/ibc
+rm -rf ./apps/keplr/src/codec/ibc
+mkdir -p ./apps/keplr/src/codec/ibc
 
 
-#mv ${OUT_DIR}ibc ./app/src/codec/
+#mv ${OUT_DIR}ibc ./apps/keplr/src/codec/
 mkdir -p ./apps/keplr/src/codec/ibc/core/client/v1/; mv ${OUT_DIR}ibc/core/client/v1/client.ts $_
 mkdir -p ./apps/keplr/src/codec/ibc/applications/transfer/v1/; mv ${OUT_DIR}ibc/applications/transfer/v1/tx.ts $_
 

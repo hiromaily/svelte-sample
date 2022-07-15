@@ -45,17 +45,17 @@ mkdir -p ${OUT_DIR}
    "$THIRD_PARTY_PROTO_DIR/tendermint/types/validator.proto" \
    "$THIRD_PARTY_PROTO_DIR/tendermint/version/types.proto"
 
-rm -rf ./app/src/codec/cosmos
-mkdir -p ./app/src/codec/cosmos/tx \
-  ./app/src/codec/cosmos/crypto \
-  ./app/src/codec/cosmos/base \
-  ./app/src/codec/cosmos/upgrade
+rm -rf ./apps/keplr/src/codec/cosmos
+mkdir -p ./apps/keplr/src/codec/cosmos/tx \
+  ./apps/keplr/src/codec/cosmos/crypto \
+  ./apps/keplr/src/codec/cosmos/base \
+  ./apps/keplr/src/codec/cosmos/upgrade
 
 
-# mv ${OUT_DIR}cosmos/tx ./app/src/codec/cosmos/
-# mv ${OUT_DIR}cosmos/crypto ./app/src/codec/cosmos/
-# mv ${OUT_DIR}cosmos/base ./app/src/codec/cosmos/
-# mv ${OUT_DIR}cosmos/upgrade ./app/src/codec/cosmos/
+# mv ${OUT_DIR}cosmos/tx ./apps/keplr/src/codec/cosmos/
+# mv ${OUT_DIR}cosmos/crypto ./apps/keplr/src/codec/cosmos/
+# mv ${OUT_DIR}cosmos/base ./apps/keplr/src/codec/cosmos/
+# mv ${OUT_DIR}cosmos/upgrade ./apps/keplr/src/codec/cosmos/
 
 mkdir -p ./apps/keplr/src/codec/cosmos/base/v1beta1/; mv ${OUT_DIR}cosmos/base/v1beta1/coin.ts $_
 mkdir -p ./apps/keplr/src/codec/cosmos/upgrade/v1beta1/; mv ${OUT_DIR}cosmos/upgrade/v1beta1/upgrade.ts $_
