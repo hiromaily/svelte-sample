@@ -41,7 +41,7 @@
 	};
 
 	// refer to https://github.com/chainapsis/keplr-example/blob/master/src/main.js
-	const sign = () => {
+	const clickSign = () => {
 		// check extension
 		if (!window.getOfflineSigner || !window.keplr) {
 			alert('Please install keplr extension');
@@ -88,7 +88,7 @@
 			</div>
 			<div class="col-sm-9">
 				<button
-					on:click={sign}
+					on:click={clickSign}
 					type="button"
 					class="btn btn-primary"
 					name="send"

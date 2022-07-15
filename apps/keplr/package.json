@@ -42,6 +42,7 @@
 		"@cosmjs/encoding": "^0.28.10",
 		"@cosmjs/launchpad": "^0.27.1",
 		"@cosmjs/stargate": "^0.28.10",
+		"@cosmjs/tendermint-rpc": "^0.28.11",
 		"@types/long": "^4.0.2",
 		"protobufjs": "^6.11.3",
 		"secretjs": "^0.17.5"

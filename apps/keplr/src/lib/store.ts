@@ -3,5 +3,3 @@ import { defaultChainID } from '$lib/config';
 
 // chainID
 export const storeChainID = writable(defaultChainID);
-// address
-//export const storeAddress = writable('');

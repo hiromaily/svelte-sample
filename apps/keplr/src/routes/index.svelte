@@ -4,6 +4,7 @@
 	import SignArbitrary from '$components/SignArbitrary.svelte';
 	import SignDirect from '$components/SignDirect.svelte';
 	import Clients from '$components/Clients.svelte';
+	import InitiateTx from '$components/InitiateTx.svelte';
 	import { onMount } from 'svelte';
 
 	// declare global {
@@ -44,4 +45,6 @@
 	<SignDirect />
 	<!-- Clients component -->
 	<Clients />
+	<!-- InitiateTx component -->
+	<InitiateTx />
 </div>

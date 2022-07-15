@@ -4,18 +4,22 @@
 	// import type { OfflineDirectSigner } from '@cosmjs/proto-signing';
 	import type { SigningStargateClient, StdFee } from '@cosmjs/stargate';
 	import { updateAddress, getWallet } from '$lib/address';
-	import { defaultChainID, defaultMnemonic, lcdSigningStargateClient } from '$lib/config';
+	import {
+		defaultChainID,
+		defaultMnemonic,
+		AliceAddress,
+		lcdSigningStargateClient
+	} from '$lib/config';
 	import { storeChainID } from '$lib/store';
-	import { createStargateClient } from '$lib/cosmosClient';
+	import { createStargateClient } from '$lib/cosmos/client';
 
 	let chainId = defaultChainID; // use writable stores with chainID, [https://svelte.dev/tutorial/writable-stores]
-	//let address = '';
 	let stargateClient: SigningStargateClient | undefined = undefined;
 
 	// UI related
 	let mnemonic = defaultMnemonic;
 	let mnemonicAddr = '';
-	let receiverAddr = 'cosmos127f42r0k2980u8phytr7eg2r836dn6lgjcn7yg'; // created by alpha CLI (https://github.com/datachainlab/fabric-tendermint-cross-demo)
+	let receiverAddr = AliceAddress; // created by alpha CLI (https://github.com/datachainlab/fabric-tendermint-cross-demo)
 	let amount = '100';
 	let denom = 'samoleans';
 	let resSendToken = '';
@@ -45,14 +49,7 @@
 		}
 	};
 
-	// const createSigningCosmWasmClient = async (offlineSigner: any) => {
-	// 	// SigningCosmWasmClient
-	// 	const wasmClient = createCosmWasmClient(address, offlineSigner, chainId);
-	// 	console.dir(wasmClient);
-	// };
-
 	const clickMnemonic = async () => {
-		//const mnem = document.getElementById('inputMnemonic').value;
 		if (mnemonic === '') {
 			alert('Please input Mnemonic');
 			return;
@@ -103,15 +100,6 @@
 		const balance = await stargateClient.getBalance(receiverAddr, denom);
 		receiverBalance = balance.amount;
 	};
-
-	// const clickBalance = async () => {
-	// 	if (!stargateClient) {
-	// 		alert('SigningStargateClient can not be created');
-	// 		return;
-	// 	}
-	// 	const res = await stargateClient.getBalance(receiverAddr, denom);
-	// 	console.log(res);
-	// };
 </script>
 
 <div class="mx-3 mt-4">
