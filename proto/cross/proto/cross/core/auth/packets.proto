@@ -1,0 +1,36 @@
+syntax = "proto3";
+package cross.core.auth;
+
+import "gogoproto/gogo.proto";
+import "ibc/core/client/v1/client.proto";
+
+option go_package = "github.com/datachainlab/cross/x/core/auth/types";
+option (gogoproto.goproto_getters_all) = false;
+
+message PacketDataIBCSignTx {
+  option (gogoproto.equal)           = false;
+
+  bytes txID = 1 [(gogoproto.casttype) = "github.com/datachainlab/cross/x/core/types.TxID"];
+  repeated bytes signers       = 2 [(gogoproto.casttype) = "AccountID"];
+  // Timeout height relative to the current block height.
+  // The timeout is disabled when set to 0.
+  ibc.core.client.v1.Height timeout_height = 3
+      [(gogoproto.moretags) = "yaml:\"timeout_height\"", (gogoproto.nullable) = false];
+  // Timeout timestamp (in nanoseconds) relative to the current block timestamp.
+  // The timeout is disabled when set to 0.
+  uint64 timeout_timestamp = 4
+    [(gogoproto.moretags) = "yaml:\"timeout_timestamp\""];
+}
+
+message PacketAcknowledgementIBCSignTx {
+  option (gogoproto.equal)           = false;
+  IBCSignTxStatus status = 1;
+}
+
+enum IBCSignTxStatus {
+  option (gogoproto.goproto_enum_prefix) = false;
+
+  IBC_SIGN_TX_STATUS_UNKNOWN = 0;
+  IBC_SIGN_TX_STATUS_OK      = 1;
+  IBC_SIGN_TX_STATUS_FAILED  = 2;
+}

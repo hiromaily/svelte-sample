@@ -1,0 +1,54 @@
+syntax = "proto3";
+package cross.core.initiator;
+
+import "google/protobuf/any.proto";
+import "gogoproto/gogo.proto";
+import "ibc/core/client/v1/client.proto";
+import "cross/core/initiator/types.proto";
+import "cross/core/tx/types.proto";
+import "cross/core/auth/types.proto";
+
+option go_package = "github.com/datachainlab/cross/x/core/initiator/types";
+option (gogoproto.goproto_getters_all) = false;
+
+// Msg defines the cross Msg service.
+service Msg {
+  // InitiateTx defines a rpc handler method for MsgInitiateTx.
+  rpc InitiateTx(MsgInitiateTx) returns (MsgInitiateTxResponse);
+}
+
+message MsgInitiateTx {
+  option (gogoproto.equal)           = false;
+  option (gogoproto.goproto_getters) = false;
+
+  string chain_id = 1;
+  uint64 nonce    = 2;
+  cross.core.tx.CommitProtocol commit_protocol = 3;
+  repeated cross.core.initiator.ContractTransaction contract_transactions = 4 [(gogoproto.nullable) = false];
+  repeated cross.core.auth.Account signers = 5 [(gogoproto.nullable) = false];
+  // Timeout height relative to the current block height.
+  // The timeout is disabled when set to 0.
+  ibc.core.client.v1.Height timeout_height = 6
+      [(gogoproto.moretags) = "yaml:\"timeout_height\"", (gogoproto.nullable) = false];
+  // Timeout timestamp (in nanoseconds) relative to the current block timestamp.
+  // The timeout is disabled when set to 0.
+  uint64 timeout_timestamp = 7
+    [(gogoproto.moretags) = "yaml:\"timeout_timestamp\""];
+}
+
+// MsgInitiateTxResponse defines the Msg/InitiateTx response type.
+message MsgInitiateTxResponse {
+  option (gogoproto.equal)           = false;
+  option (gogoproto.goproto_getters) = false;
+
+  bytes txID = 1 [(gogoproto.casttype) = "github.com/datachainlab/cross/x/core/types.TxID"];
+  InitiateTxStatus status = 2;
+}
+
+enum InitiateTxStatus {
+  option (gogoproto.goproto_enum_prefix) = false;
+
+  INITIATE_TX_STATUS_UNKNOWN   = 0;
+  INITIATE_TX_STATUS_PENDING   = 1;
+  INITIATE_TX_STATUS_VERIFIED  = 2;
+}

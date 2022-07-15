@@ -1,0 +1,14 @@
+syntax = "proto3";
+package cross.core.types;
+
+import "gogoproto/gogo.proto";
+
+option go_package = "github.com/datachainlab/cross/x/core/types";
+option (gogoproto.goproto_getters_all) = false;
+
+message GenesisState {}
+
+message Acknowledgement {
+  bool is_success = 1;
+  bytes result = 2;
+}
