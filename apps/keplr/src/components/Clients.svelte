@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import type { SigningStargateClient, StdFee } from '@cosmjs/stargate';
 	// import type { OfflineSigner } from '@cosmjs/launchpad';
 	// import type { OfflineDirectSigner } from '@cosmjs/proto-signing';
-	import type { SigningStargateClient, StdFee } from '@cosmjs/stargate';
 	import { updateAddress, getWallet } from '$lib/address';
 	import {
 		defaultChainID,

@@ -2,7 +2,7 @@
 import { messageTypeRegistry } from '../../../typeRegistry';
 import { Any } from '../../../google/protobuf/any';
 import Long from 'long';
-import * as _m0 from 'protobufjs/minimal';
+import _m0 from 'protobufjs/minimal.js';
 
 export const protobufPackage = 'cross.core.initiator';
 

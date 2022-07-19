@@ -3,7 +3,7 @@ import { messageTypeRegistry } from '../../../../typeRegistry';
 import { Coin } from '../../../../cosmos/base/v1beta1/coin';
 import { Height } from '../../../core/client/v1/client';
 import Long from 'long';
-import * as _m0 from 'protobufjs/minimal';
+import _m0 from 'protobufjs/minimal.js';
 
 export const protobufPackage = 'ibc.applications.transfer.v1';
 

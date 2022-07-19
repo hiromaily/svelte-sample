@@ -1,5 +1,4 @@
 import { DirectSecp256k1HdWallet } from '@cosmjs/proto-signing';
-//import type { AccountData } from '@cosmjs/proto-signing';
 
 export interface AddressSigner {
 	address: string;

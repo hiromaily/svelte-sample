@@ -9,15 +9,15 @@ const config = {
 	plugins: [
 		sveltekit()
 		// resolve({
-		//   extensions: ['.js', '.ts']
+		// 	extensions: ['.js', '.ts']
 		// })
 		// alias({
-		//   entries: [
-		//     {
-		//       find: new RegExp('protobufjs/minimal.js$'),
-		//       replacement: "protobufjs/dist/minimal/protobuf.min.js"
-		//     }
-		//   ]
+		// 	entries: [
+		// 		{
+		// 			find: new RegExp('protobufjs/minimal$'),
+		// 			replacement: 'protobufjs/minimal.js'
+		// 		}
+		// 	]
 		// })
 	],
 	build: {
@@ -30,8 +30,8 @@ const config = {
 		}
 	},
 	// resolve: {
-	//   // https://vitejs.dev/config/#resolve-extensions
-	//   extensions: ['.js', '.ts'],
+	// 	// https://vitejs.dev/config/#resolve-extensions
+	// 	extensions: ['.js', '.ts']
 	// },
 	// https://vitejs.dev/config/#define
 	define: {

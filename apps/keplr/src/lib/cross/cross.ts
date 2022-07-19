@@ -1,15 +1,16 @@
 import snakecaseKeys from 'snakecase-keys';
-import { query } from '$lib/cosmos/client';
-import type { ClientBundle, AbciQueryResponse } from '$lib/cosmos/client';
-//import { bytesFromBase64 } from '$lib/base64/base64';
+
 import { Any } from '$codec/google/protobuf/any';
-import { QuerySelfXCCRequest, QuerySelfXCCResponse } from '$codec/cross/core/initiator/query';
 import { ContractTransaction } from '$codec/cross/core/initiator/types';
+import { QuerySelfXCCRequest, QuerySelfXCCResponse } from '$codec/cross/core/initiator/query';
 import { ReturnValue } from '$codec/cross/core/tx/types';
 import type { Account } from '$codec/cross/core/auth/types';
+import { ChannelInfo } from '$codec/cross/core/xcc/types';
+
+import { query } from '$lib/cosmos/client';
+import type { ClientBundle, AbciQueryResponse } from '$lib/cosmos/client';
 import { decodeAnyFromJSON } from '$lib/any/any';
 import { createAccount } from '$lib/cross/account';
-import { ChannelInfo } from '$codec/cross/core/xcc/types';
 
 const getXCC = async (
 	client: ClientBundle,

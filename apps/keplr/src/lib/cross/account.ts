@@ -1,5 +1,3 @@
-//import { Any } from '$codec/google/protobuf/any';
-//import { fromHex, toBech32 } from '@cosmjs/encoding';
 import { Account, AuthMode, AuthType } from '$codec/cross/core/auth/types';
 
 // signerId would be bech32 address

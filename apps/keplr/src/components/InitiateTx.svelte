@@ -2,18 +2,21 @@
 	import { onMount } from 'svelte';
 	import Long from 'long';
 	import type { StdFee } from '@cosmjs/stargate';
-	import type { GeneratedType } from '@cosmjs/proto-signing';
 	import { Registry } from '@cosmjs/proto-signing';
+	import type { GeneratedType } from '@cosmjs/proto-signing';
+
 	import { getWallet } from '$lib/address';
 	import { defaultMnemonic, AliceAddress, BobAddress, lcdSigningStargateClient } from '$lib/config';
 	import { createClientBundle } from '$lib/cosmos/client';
 	import type { ClientBundle } from '$lib/cosmos/client';
 	import { createContractTxForUI, createContractTxJSON } from '$lib/cross/cross';
 	import type { ContractTransaction } from '$codec/cross/core/initiator/types';
-	import { MsgInitiateTx } from '$codec/cross/core/initiator/msgs';
-	import { TxRaw } from 'cosmjs-types/cosmos/tx/v1beta1/tx';
 	import { createAccount } from '$lib/cross/account';
 	import { newMsgInitiateTx, msgInitiateTxtoEncodeObject } from '$lib/cross/initiateTx';
+
+	import { MsgInitiateTx } from '$codec/cross/core/initiator/msgs';
+	import { TxRaw } from '$codec/cosmos/tx/v1beta1/tx';
+	//import { TxRaw } from 'cosmjs-types/cosmos/tx/v1beta1/tx';
 
 	let client: ClientBundle;
 	let ctx: ContractTransaction | undefined = undefined;

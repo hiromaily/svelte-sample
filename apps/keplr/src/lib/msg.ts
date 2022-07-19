@@ -1,9 +1,9 @@
 import Long from 'long';
 import type { Coin } from '$codec/cosmos/base/v1beta1/coin';
+import { TxBody, AuthInfo, SignDoc } from '$codec/cosmos/tx/v1beta1/tx';
 import { Height } from '$codec/ibc/core/client/v1/client';
 import { MsgTransfer } from '$codec/ibc/applications/transfer/v1/tx';
 import { Any } from '$codec/google/protobuf/any';
-import { TxBody, AuthInfo, SignDoc } from '$codec/cosmos/tx/v1beta1/tx';
 
 // sourcePort: string;
 // sourceChannel: string;
