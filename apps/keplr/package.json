@@ -39,13 +39,16 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@cosmjs/encoding": "^0.28.10",
+		"@cosmjs/encoding": "^0.28.11",
 		"@cosmjs/launchpad": "^0.27.1",
 		"@cosmjs/stargate": "^0.28.10",
 		"@cosmjs/tendermint-rpc": "^0.28.11",
 		"@types/long": "^4.0.2",
+		"map-obj": "^5.0.2",
 		"protobufjs": "^6.11.3",
-		"secretjs": "^0.17.5"
+		"secretjs": "^0.17.5",
+		"snakecase-keys": "^5.4.2",
+		"strip-hex-prefix": "^1.0.0"
 	},
 	"overrides": {
 		"rollup": "2.76.0"

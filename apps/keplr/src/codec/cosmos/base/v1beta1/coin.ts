@@ -1,8 +1,7 @@
 /* eslint-disable */
 import { messageTypeRegistry } from '../../../typeRegistry';
 import Long from 'long';
-//import * as _m0 from "protobufjs/minimal.js";
-import _m0 from 'protobufjs/minimal.js';
+import * as _m0 from 'protobufjs/minimal';
 
 export const protobufPackage = 'cosmos.base.v1beta1';
 

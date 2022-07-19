@@ -34,7 +34,7 @@ mkdir -p ${OUT_DIR}
    --ts_proto_out="$OUT_DIR" \
    --proto_path="$COSMOS_PROTO_DIR" \
    --proto_path="$THIRD_PARTY_PROTO_DIR" \
-   --ts_proto_opt="esModuleInterop=true,forceLong=long,useOptionals=all,outputTypeRegistry=true,importSuffix=.js" \
+   --ts_proto_opt="esModuleInterop=true,forceLong=long,useOptionals=all,outputTypeRegistry=true" \
    "$THIRD_PARTY_PROTO_DIR/confio/proofs.proto" \
    "$THIRD_PARTY_PROTO_DIR/tendermint/abci/types.proto" \
    "$THIRD_PARTY_PROTO_DIR/tendermint/crypto/keys.proto" \
@@ -51,6 +51,8 @@ mkdir -p ./apps/keplr/src/codec/cosmos/tx \
   ./apps/keplr/src/codec/cosmos/base \
   ./apps/keplr/src/codec/cosmos/upgrade
 
+rm -rf ./apps/keplr/src/codec/tendermint
+mkdir -p ./apps/keplr/src/codec/tendermint
 
 # mv ${OUT_DIR}cosmos/tx ./apps/keplr/src/codec/cosmos/
 # mv ${OUT_DIR}cosmos/crypto ./apps/keplr/src/codec/cosmos/
@@ -62,6 +64,9 @@ mkdir -p ./apps/keplr/src/codec/cosmos/upgrade/v1beta1/; mv ${OUT_DIR}cosmos/upg
 mkdir -p ./apps/keplr/src/codec/cosmos/tx/v1beta1/; mv ${OUT_DIR}cosmos/tx/v1beta1/tx.ts $_
 mkdir -p ./apps/keplr/src/codec/cosmos/tx/signing/v1beta1/; mv ${OUT_DIR}cosmos/tx/signing/v1beta1/signing.ts $_
 mkdir -p ./apps/keplr/src/codec/cosmos/crypto/multisig/v1beta1/; mv ${OUT_DIR}cosmos/crypto/multisig/v1beta1/multisig.ts $_
+mkdir -p ./apps/keplr/src/codec/cosmos/crypto/secp256k1/; mv ${OUT_DIR}cosmos/crypto/secp256k1/keys.ts $_
+
+mv ${OUT_DIR}tendermint ./apps/keplr/src/codec/
 
 # Remove unnecessary codec files
 rm -rf ./tmp

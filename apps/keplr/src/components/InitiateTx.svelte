@@ -1,29 +1,49 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import type { SigningStargateClient, QueryClient } from '@cosmjs/stargate';
+	import Long from 'long';
+	import type { StdFee } from '@cosmjs/stargate';
+	import type { GeneratedType } from '@cosmjs/proto-signing';
+	import { Registry } from '@cosmjs/proto-signing';
 	import { getWallet } from '$lib/address';
 	import { defaultMnemonic, AliceAddress, BobAddress, lcdSigningStargateClient } from '$lib/config';
 	import { createClientBundle } from '$lib/cosmos/client';
 	import type { ClientBundle } from '$lib/cosmos/client';
+	import { createContractTxForUI, createContractTxJSON } from '$lib/cross/cross';
+	import type { ContractTransaction } from '$codec/cross/core/initiator/types';
+	import { MsgInitiateTx } from '$codec/cross/core/initiator/msgs';
+	import { TxRaw } from 'cosmjs-types/cosmos/tx/v1beta1/tx';
+	import { createAccount } from '$lib/cross/account';
+	import { newMsgInitiateTx, msgInitiateTxtoEncodeObject } from '$lib/cross/initiateTx';
 
 	let client: ClientBundle;
+	let ctx: ContractTransaction | undefined = undefined;
+	let ctx2: ContractTransaction | undefined = undefined;
+
 	// UI related
 	let mnemonic = defaultMnemonic;
-	let mnemonicAddr = '';
+	let senderAddr = '';
+	let chainChannel = 'channel-0:cross';
+	let chainId = 'ibc0';
 	let resContractTx = '';
+	let resContractTx2 = '';
 
 	// initialization
 	onMount(async () => {
 		// create client
 		const wallet = await getWallet(mnemonic);
 		const accounts = await wallet.getAccounts();
-		console.log('accounts:', accounts);
+		//console.log('accounts:', accounts);
+
+		const registry = new Registry();
+		registry.register(`/${MsgInitiateTx.$type}`, MsgInitiateTx as GeneratedType);
+		registry.register(MsgInitiateTx.$type, MsgInitiateTx as GeneratedType);
+		const options = { registry: registry };
+
 		if (accounts && accounts.length > 0) {
 			// create client
-			client = await createClientBundle(lcdSigningStargateClient, wallet);
-			// mnemonic address
-			mnemonicAddr = accounts[0].address;
+			client = await createClientBundle(lcdSigningStargateClient, wallet, options);
 		}
+		senderAddr = accounts[0].address;
 	});
 
 	// read cosmos sample code
@@ -31,19 +51,84 @@
 	// FIXME: Do I need to use https://github.com/terra-money/terra.js ??
 
 	const clickCreateContractTx = async () => {
-		const amout = 100;
-		const callInfo = `{"method":"transfer","args":["${BobAddress}","${amout}"]}`;
-		const signerAddr = AliceAddress;
 		if (!client) {
+			console.log('client is not ready');
 			return;
 		}
 
-		// refer to https://github.com/search?q=broadcastTx+cosmjs&type=code
-		//stargateClient.broadcastTx();
+		// contract A
+		const amout = 100;
+		let callInfo = `{"method":"transfer","args":["${BobAddress}","${amout}"]}`;
+		ctx = await createContractTxForUI(client, AliceAddress, callInfo, undefined);
+		if (ctx) {
+			resContractTx = createContractTxJSON(ctx);
+			console.log(resContractTx);
+		}
 
-		// refer to https://github.com/search?q=abciQuery+cosmjs&type=code
-		// const tmClient = await Tendermint34Client.connect(lcdSigningStargateClient);
-		// tmClient.abciQuery()
+		// contract B
+		callInfo = `{"method":"transfer","args":["${AliceAddress}","${amout}"]}`;
+		ctx2 = await createContractTxForUI(client, BobAddress, callInfo, chainChannel);
+		if (ctx2) {
+			resContractTx2 = createContractTxJSON(ctx2);
+			console.log('hogehoge:', resContractTx2);
+		}
+	};
+	const clickSendInitiateTx = async () => {
+		if (!client || !client.stargate) {
+			console.log('client is not ready');
+			return;
+		}
+
+		const lightHeight = Long.fromNumber(1000);
+		let ctxs: Array<ContractTransaction> = [];
+		if (ctx) ctxs.push(ctx);
+		if (ctx2) ctxs.push(ctx2);
+
+		// get signer by alice
+		const account = createAccount(AliceAddress);
+		// create MsgInitiateTx
+		const msg = newMsgInitiateTx(lightHeight, chainId, account, ctxs, undefined);
+
+		const memo = '';
+		const fee: StdFee = {
+			amount: [],
+			gas: '450000'
+		};
+		// create rawTx
+		// FIXME: Failed to retrieve account from signer
+		// => use signerAddress related to wallet of client
+		// FIXME: Unregistered type url: cross.core.initiator.MsgInitiateTx
+		// => call register for type of message
+		//client.stargate.registry.register(msg.$type, MsgInitiateTx as GeneratedType);
+		const txRaw = await client.stargate.sign(
+			senderAddr,
+			[msgInitiateTxtoEncodeObject(msg)],
+			fee,
+			memo
+		);
+		const signedBytes = Uint8Array.from(TxRaw.encode(txRaw).finish());
+
+		// build tx with msg
+		//const tx = buildTxWithMsgInitiate(msg);
+		//if (!tx) return;
+
+		// send tx (Uint8Array)
+		// FIXME: Error: Broadcasting transaction failed with code 2 (codespace: sdk).
+		//  - Log: unable to resolve type URL cross.core.initiator.MsgInitiateTx: tx parse error
+		// https://github.com/cosmos/cosmos-sdk/blob/6f070623741fe0d6851d79ada41e6e2b1c67e236/codec/types/interface_registry.go
+		const res = await client.stargate.broadcastTx(signedBytes);
+		console.log('clickSendInitiateTx(7)');
+		// export interface DeliverTxResponse {
+		//   readonly height: number;
+		//   /** Error code. The transaction suceeded iff code is 0. */
+		//   readonly code: number;
+		//   readonly transactionHash: string;
+		//   readonly rawLog?: string;
+		//   readonly data?: readonly MsgData[];
+		//   readonly gasUsed: number;
+		//   readonly gasWanted: number;
+		// }
+		console.log(res);
 	};
 </script>
 
@@ -51,6 +136,13 @@
 	<h4>Create InitiateTx (Alice to Bob)</h4>
 	<div class="mx-3">
 		<div class="row">
+			<div class="input-group">
+				<label for="inputReceiver" class="col-sm-3 col-form-label">Chain Channel:</label>
+				<div class="col-sm-9">
+					<input type="text" class="form-control" id="inputReceiver" value={chainChannel} />
+				</div>
+			</div>
+
 			<div class="col-sm-12">
 				<button
 					on:click={clickCreateContractTx}
@@ -64,8 +156,22 @@
 			</div>
 
 			<div class="mt-4">
-				<h5>Result of ContractTx</h5>
+				<h5>Result of ContractTx1</h5>
 				<div class="p-3 border bg-light text-muted"><pre>{resContractTx}</pre></div>
+				<h5>Result of ContractTx2</h5>
+				<div class="p-3 border bg-light text-muted"><pre>{resContractTx2}</pre></div>
+			</div>
+
+			<div class="col-sm-12">
+				<button
+					on:click={clickSendInitiateTx}
+					type="button"
+					class="btn btn-primary"
+					name="send"
+					style="width: 170px;"
+				>
+					Submit InitiateTx
+				</button>
 			</div>
 		</div>
 	</div>

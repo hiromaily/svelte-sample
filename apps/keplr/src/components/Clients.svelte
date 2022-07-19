@@ -56,7 +56,7 @@
 		}
 		const wallet = await getWallet(mnemonic);
 		const accounts = await wallet.getAccounts();
-		console.log('accounts:', accounts);
+		//console.log('accounts:', accounts);
 		if (accounts && accounts.length > 0) {
 			// create client
 			stargateClient = await createStargateClient(lcdSigningStargateClient, wallet);

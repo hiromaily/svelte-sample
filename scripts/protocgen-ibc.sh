@@ -31,8 +31,6 @@ done
 rm -rf ./apps/keplr/src/codec/ibc
 mkdir -p ./apps/keplr/src/codec/ibc
 
-
-#mv ${OUT_DIR}ibc ./apps/keplr/src/codec/
 mkdir -p ./apps/keplr/src/codec/ibc/core/client/v1/; mv ${OUT_DIR}ibc/core/client/v1/client.ts $_
 mkdir -p ./apps/keplr/src/codec/ibc/applications/transfer/v1/; mv ${OUT_DIR}ibc/applications/transfer/v1/tx.ts $_
 

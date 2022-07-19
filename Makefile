@@ -22,14 +22,14 @@ proto-gen-cross:
 	@echo "Generating Protobuf files for cross"
 	./scripts/protocgen-cross.sh
 
-.PHONY: get-yui-fabric-ibc-proto
-get-yui-fabric-ibc-proto:
-	./scripts/get-yui-fabric-ibc-proto.sh
+# .PHONY: get-yui-fabric-ibc-proto
+# get-yui-fabric-ibc-proto:
+# 	./scripts/get-yui-fabric-ibc-proto.sh
 
-.PHONY: proto-gen-yui-fabric-ibc
-proto-gen-yui-fabric-ibc:
-	@echo "Generating Protobuf files for proto-gen-yui-fabric-ibc"
-	./scripts/protocgen-yui-fabric-ibc.sh
+# .PHONY: proto-gen-yui-fabric-ibc
+# proto-gen-yui-fabric-ibc:
+# 	@echo "Generating Protobuf files for proto-gen-yui-fabric-ibc"
+# 	./scripts/protocgen-yui-fabric-ibc.sh
 
 #------------------------------------------------------------------------------
 # docker

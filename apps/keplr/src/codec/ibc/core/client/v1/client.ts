@@ -3,8 +3,7 @@ import { messageTypeRegistry } from '../../../../typeRegistry';
 import { Any } from '../../../../google/protobuf/any';
 import { Plan } from '../../../../cosmos/upgrade/v1beta1/upgrade';
 import Long from 'long';
-//import * as _m0 from "protobufjs/minimal.js";
-import _m0 from 'protobufjs/minimal.js';
+import * as _m0 from 'protobufjs/minimal';
 
 export const protobufPackage = 'ibc.core.client.v1';
 

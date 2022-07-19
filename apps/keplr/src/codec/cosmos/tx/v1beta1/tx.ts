@@ -5,8 +5,7 @@ import { SignMode, signModeFromJSON, signModeToJSON } from '../signing/v1beta1/s
 import { CompactBitArray } from '../../crypto/multisig/v1beta1/multisig';
 import Long from 'long';
 import { Coin } from '../../base/v1beta1/coin';
-//import * as _m0 from "protobufjs/minimal.js";
-import _m0 from 'protobufjs/minimal.js';
+import * as _m0 from 'protobufjs/minimal';
 
 export const protobufPackage = 'cosmos.tx.v1beta1';
 

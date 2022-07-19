@@ -28,16 +28,12 @@ done
 rm -rf ./apps/keplr/src/codec/cross
 mkdir -p ./apps/keplr/src/codec/cross
 
-# TODO: copy only required files
-mv ${OUT_DIR}cross ./apps/keplr/src/codec/
-# mkdir -p ./apps/keplr/src/codec/cross/core/client/v1/; mv ${OUT_DIR}ibc/core/client/v1/client.ts $_
-# mkdir -p ./apps/keplr/src/codec/cross/applications/transfer/v1/; mv ${OUT_DIR}ibc/applications/transfer/v1/tx.ts $_
+mkdir -p ./apps/keplr/src/codec/cross/core/auth/; mv ${OUT_DIR}cross/core/auth/types.ts $_
+mkdir -p ./apps/keplr/src/codec/cross/core/initiator/; mv ${OUT_DIR}cross/core/initiator/types.ts $_
+mv ${OUT_DIR}cross/core/initiator/msgs.ts $_
+mv ${OUT_DIR}cross/core/initiator/query.ts $_
+mkdir -p ./apps/keplr/src/codec/cross/core/tx/; mv ${OUT_DIR}cross/core/tx/types.ts $_
+mkdir -p ./apps/keplr/src/codec/cross/core/xcc/; mv ${OUT_DIR}cross/core/xcc/types.ts $_
 
 # Remove unnecessary codec files
 rm -rf ./tmp
-
-# Remove unnecessary codec files
-# rm -rf \
-#   src/codec/gogoproto/ \
-#   src/codec/google/api/ \
-#   src/codec/google/protobuf/descriptor.ts
