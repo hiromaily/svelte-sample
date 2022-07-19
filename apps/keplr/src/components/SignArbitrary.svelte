@@ -2,14 +2,14 @@
 	import { onMount } from 'svelte';
 	//import { fromBase64 } from '@cosmjs/encoding';
 	import { updateAddress } from '$lib/address';
-	import { defaultChainID } from '$lib/config';
+	import { conf } from '$lib/config';
 	import { storeChainID } from '$lib/store';
 
 	// import { SigningCosmosClient } from '@cosmjs/launchpad';
 	// import { DirectSecp256k1HdWallet } from '@cosmjs/proto-signing';
 	// import { SigningStargateClient } from '@cosmjs/stargate';
 
-	let chainId = defaultChainID; // use writable stores with chainID [https://svelte.dev/tutorial/writable-stores]
+	let chainId = conf.chainID; // use writable stores with chainID [https://svelte.dev/tutorial/writable-stores]
 	let address = '';
 	// UI related
 	let signature = 'result';

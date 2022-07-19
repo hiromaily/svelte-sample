@@ -3,6 +3,7 @@ import { Tendermint34Client } from '@cosmjs/tendermint-rpc';
 import type { AbciQueryParams } from '@cosmjs/tendermint-rpc/build/tendermint34/requests';
 import { SigningStargateClient } from '@cosmjs/stargate';
 import type { SigningStargateClientOptions } from '@cosmjs/stargate';
+import { getWallet } from '$lib/address';
 //import { BroadcastMode, SigningCosmWasmClient } from 'secretjs';
 //import { SigningCosmosClient } from '@cosmjs/launchpad';
 //import type { OfflineSigner as OfflineAminoSigner } from '@cosmjs/launchpad';
@@ -17,6 +18,11 @@ export interface ClientBundle {
 export interface AbciQueryResponse {
 	key: Uint8Array;
 	value: Uint8Array;
+}
+
+export interface ClientBundleAddress {
+	clientBundle: ClientBundle;
+	address: string;
 }
 
 const createClientBundle = async (
@@ -55,6 +61,24 @@ const createStargateClient = async (
 	}
 
 	return undefined;
+};
+
+const createClientByMnemonic = async (
+	mnemonic: string,
+	lcd: string,
+	options?: SigningStargateClientOptions
+): Promise<ClientBundleAddress> => {
+	const wallet = await getWallet(mnemonic);
+	const accounts = await wallet.getAccounts();
+	if (accounts && accounts.length == 0) {
+		return Promise.reject(new Error('failed to create client'));
+	}
+	// create client
+	const client = await createClientBundle(lcd, wallet, options);
+	return {
+		clientBundle: client,
+		address: accounts[0].address
+	};
 };
 
 // Deprecated
@@ -117,8 +141,4 @@ const query = async (
 	return resFormat;
 };
 
-// TODO: use for something?
-// refer to https://github.com/search?q=broadcastTx+cosmjs&type=code
-//stargateClient.broadcastTx();
-
-export { createClientBundle, createStargateClient, query };
+export { createClientBundle, createStargateClient, createClientByMnemonic, query };

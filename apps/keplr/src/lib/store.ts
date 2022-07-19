@@ -1,5 +1,9 @@
 import { writable } from 'svelte/store';
-import { defaultChainID } from '$lib/config';
+import { conf } from '$lib/config';
+import type { ClientBundleAddress } from '$lib/cosmos/client';
 
-// chainID
-export const storeChainID = writable(defaultChainID);
+type ClientBundleAddressOr = ClientBundleAddress | undefined;
+
+// stores
+export const storeChainID = writable(conf.chainID);
+export const storeClient = writable(undefined as ClientBundleAddressOr);

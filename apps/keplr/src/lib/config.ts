@@ -1,24 +1,67 @@
-// FIXME: define as config object
+import { Registry } from '@cosmjs/proto-signing';
+import type { GeneratedType } from '@cosmjs/proto-signing';
+import type { SigningStargateClientOptions, StdFee } from '@cosmjs/stargate';
+import { MsgInitiateTx } from '$codec/cross/core/initiator/msgs';
 
-// chainID
-export const defaultChainID = 'cosmoshub';
+// FIXME: define as json outside
+export interface User {
+	nemonic: string;
+	address: string;
+}
 
-// SigningCosmosClient LCD: deprecated
+type Users = {
+	[key: string]: User;
+};
+
+export interface Client {
+	lcd: string;
+	options: SigningStargateClientOptions;
+}
+
+export interface Config {
+	chainID: string;
+	client: Client;
+	users: Users;
+	fee: StdFee;
+}
+
+// registry for client
+const registry = new Registry();
+registry.register(`/${MsgInitiateTx.$type}`, MsgInitiateTx as GeneratedType);
+registry.register(MsgInitiateTx.$type, MsgInitiateTx as GeneratedType);
+
+export const conf: Config = {
+	chainID: 'cosmoshub',
+	client: {
+		lcd: 'http://localhost:26657',
+		options: { registry: registry }
+	},
+	users: {
+		admin: {
+			nemonic:
+				'hello creek grace lyrics remember struggle clip prosper donate flip moment bird humor army apology mix salute become bonus make satisfy erase stone claw',
+			address: 'cosmos1jpdsvx37tmh5ugrfgghq5y0c9r4720cmtxlcr8'
+		},
+		alice: {
+			nemonic:
+				'badge net govern soldier future dash eyebrow end decade fuel hedgehog atom proud enforce diamond leader shaft order miss impose noble symptom time casino',
+			address: 'cosmos1cc6zlw8dywmea0q6gjh59d4vzhev35seqrqvjg'
+		},
+		bob: {
+			nemonic:
+				'abandon nurse dash intact wagon stuff faint tube scatter square lock drop input fantasy obscure twist estate enforce inherit grocery scale liquid curtain art',
+			address: 'cosmos19hxerftq5ca5esvceuc7plc30xnl4k60z7hvkj'
+		}
+	},
+	fee: {
+		amount: [],
+		gas: '450000'
+	}
+};
+
 // https://docs.cosmos.network/master/core/grpc_rest.html
 // https://docs.cosmos.network/master/core/grpc_rest.html#rest-server
-//export const lcdSigningCosmosClient = 'https://lcd-cosmoshub.keplr.app/rest'; // CORS policy error
-
-// SigningStargateClient LCD
-//export const lcdSigningStargateClient = 'https://rpc.cosmos.network:26657';
-//export const lcdSigningStargateClient = 'https://stargate.cosmos.network/';
-export const lcdSigningStargateClient = 'http://localhost:26657';
-
-export const defaultMnemonic =
-	'path tourist guilt wide flat sign sort same rather option uniform doll animal later thrive alert usual random hollow sell baby video young foster';
-export const AliceMnemonic =
-	'opera gasp shuffle gym submit glare swift dumb farm forum remember caught original empower melt wise curtain muscle spell defy kind mandate rescue vacant';
-export const BobMnemonic =
-	'paddle goose fantasy photo project ask certain remove buddy valid explain pattern door best coach cinnamon front coach clump elephant voyage approve harsh market';
-export const simdAddr = 'cosmos16cklmahud406gg6mx8wz3s2hf68e5997p4pdv6';
-export const AliceAddress = 'cosmos127f42r0k2980u8phytr7eg2r836dn6lgjcn7yg';
-export const BobAddress = 'cosmos1zw6mexu7hr883u2dpqgznhlu9c4nz6ghplw74a';
+// expected urls are
+// - https://lcd-cosmoshub.keplr.app/rest
+// - https://rpc.cosmos.network:26657
+// - https://stargate.cosmos.network/

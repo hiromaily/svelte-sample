@@ -10,8 +10,6 @@ import { TxBody, Tx, AuthInfo } from '$codec/cosmos/tx/v1beta1/tx';
 import { Height } from '$codec/ibc/core/client/v1/client';
 import { Any } from '$codec/google/protobuf/any';
 
-//import { decodeHexString } from '$lib/hex/hex';
-
 // newMsgInitiateTx is equivalent to `createInitiateTx()` of cli written by Golang
 const newMsgInitiateTx = (
 	lightHeight: Long,
@@ -39,7 +37,7 @@ const newMsgInitiateTx = (
 
 const msgInitiateTxtoEncodeObject = (msg: MsgInitiateTx): EncodeObject => {
 	const encObj: EncodeObject = {
-		typeUrl: msg.$type,
+		typeUrl: `/${msg.$type}`, // Note: this / is for server side
 		value: {
 			chainId: msg.chainId,
 			nonce: msg.nonce,
@@ -53,7 +51,7 @@ const msgInitiateTxtoEncodeObject = (msg: MsgInitiateTx): EncodeObject => {
 	return encObj;
 };
 
-const buildTxWithMsg = (msgAny: Any): Tx => {
+const buildTxWithMsg = (msgAny: Any, authInfo?: AuthInfo): Tx => {
 	// create TxBody with msg
 	const txBody: TxBody = {
 		$type: TxBody.$type,
@@ -65,9 +63,11 @@ const buildTxWithMsg = (msgAny: Any): Tx => {
 	};
 
 	// create AuthInfo
-	const authInfoJSON =
-		'{"signerInfos":[],"fee":{"amount":[],"gasLimit":"0","payer":"","granter":""}}';
-	const authInfo = AuthInfo.fromJSON(JSON.parse(authInfoJSON));
+	if (!authInfo) {
+		const authInfoJSON =
+			'{"signerInfos":[],"fee":{"amount":[],"gasLimit":"0","payer":"","granter":""}}';
+		authInfo = AuthInfo.fromJSON(JSON.parse(authInfoJSON));
+	}
 
 	// create signature
 	const emptySig = new TextEncoder().encode('');
@@ -81,13 +81,13 @@ const buildTxWithMsg = (msgAny: Any): Tx => {
 	return tx;
 };
 
-const buildTxWithMsgInitiate = (msg: MsgInitiateTx): Tx => {
+const buildTxWithMsgInitiate = (msg: MsgInitiateTx, authInfo?: AuthInfo): Tx => {
 	// convert msg to Any
 	const msgAny = Any.fromPartial({
 		typeUrl: MsgInitiateTx.$type,
 		value: MsgInitiateTx.encode(msg).finish()
 	});
-	return buildTxWithMsg(msgAny);
+	return buildTxWithMsg(msgAny, authInfo);
 };
 
 // const newMsgSignTx = (txId: string, account: Account): MsgExtSignTx => {

@@ -23,7 +23,7 @@ const getXCC = async (
 		}
 		// to Any
 		return Any.fromPartial({
-			typeUrl: ChannelInfo.$type,
+			typeUrl: `/${ChannelInfo.$type}`, // Note: this / is for server side
 			value: ChannelInfo.encode(channelInfo).finish()
 		});
 	}

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { storeChainID } from '$lib/store';
-	import { defaultChainID } from '$lib/config';
+	import { conf } from '$lib/config';
 
 	const chainIDChanged = (e: { target: HTMLSelectElement }) => {
 		console.log(`chainID changed: ${e.target.value}`);
@@ -19,7 +19,7 @@
 			class="form-select"
 			aria-label="ChainID"
 		>
-			<option value={defaultChainID}>{defaultChainID}</option>
+			<option value={conf.chainID}>{conf.chainID}</option>
 			<option value="cosmoshub-4">cosmoshub-4</option>
 		</select>
 	</div>

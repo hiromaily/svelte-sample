@@ -1,5 +1,6 @@
 <script lang="ts">
 	//import { Window as KeplrWindow } from '@keplr-wallet/types';
+	import Header from '$components/Header.svelte';
 	import ChainID from '$components/ChainID.svelte';
 	import SignArbitrary from '$components/SignArbitrary.svelte';
 	import SignDirect from '$components/SignDirect.svelte';
@@ -37,6 +38,8 @@
 
 <div class="mb-5">
 	<h3 class="text-bg-primary p-3">Keplr Wallet</h3>
+	<!-- Header component -->
+	<Header />
 	<!-- ChainID component -->
 	<ChainID />
 	<!-- SignArbitrary component -->

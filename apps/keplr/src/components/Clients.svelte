@@ -1,25 +1,16 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import type { SigningStargateClient, StdFee } from '@cosmjs/stargate';
-	// import type { OfflineSigner } from '@cosmjs/launchpad';
-	// import type { OfflineDirectSigner } from '@cosmjs/proto-signing';
-	import { updateAddress, getWallet } from '$lib/address';
-	import {
-		defaultChainID,
-		defaultMnemonic,
-		AliceAddress,
-		lcdSigningStargateClient
-	} from '$lib/config';
-	import { storeChainID } from '$lib/store';
-	import { createStargateClient } from '$lib/cosmos/client';
+	import { conf } from '$lib/config';
+	import { createClientByMnemonic } from '$lib/cosmos/client';
+	import type { ClientBundle } from '$lib/cosmos/client';
+	import { storeClient } from '$lib/store';
 
-	let chainId = defaultChainID; // use writable stores with chainID, [https://svelte.dev/tutorial/writable-stores]
-	let stargateClient: SigningStargateClient | undefined = undefined;
+	let client: ClientBundle | undefined;
 
 	// UI related
-	let mnemonic = defaultMnemonic;
+	let mnemonic = conf.users['admin'].nemonic;
 	let mnemonicAddr = '';
-	let receiverAddr = AliceAddress; // created by alpha CLI (https://github.com/datachainlab/fabric-tendermint-cross-demo)
+	let receiverAddr = conf.users['alice'].address; // created by alpha CLI (https://github.com/datachainlab/fabric-tendermint-cross-demo)
 	let amount = '100';
 	let denom = 'samoleans';
 	let resSendToken = '';
@@ -27,46 +18,55 @@
 
 	// initialization
 	onMount(async () => {
-		storeChainID.subscribe((value) => {
-			chainId = value;
-			// update address
-			updateAddress(chainId)
-				.then((res) => {
-					//address = res.address;
-					return res.offlineSigner;
-				})
-				.then((offlineSigner) => {
-					return createSigningStargateClient(offlineSigner);
-				});
+		storeClient.subscribe((value) => {
+			if (!value) return;
+			client = value.clientBundle;
+			mnemonicAddr = value.address;
+			console.log('client is updated');
 		});
+
+		// storeChainID.subscribe((value) => {
+		// 	chainId = value;
+		// 	// update address
+		// 	updateAddress(chainId)
+		// 		.then((res) => {
+		// 			//address = res.address;
+		// 			return res.offlineSigner;
+		// 		})
+		// 		.then((offlineSigner) => {
+		// 			return createSigningStargateClient(offlineSigner);
+		// 		});
+		// });
+		//clickMnemonic();
 	});
 
-	const createSigningStargateClient = async (offlineSigner: any) => {
-		// SigningStargateClient
-		stargateClient = await createStargateClient(lcdSigningStargateClient, offlineSigner);
-		if (stargateClient) {
-			console.dir(stargateClient);
-		}
-	};
+	// const createSigningStargateClient = async (offlineSigner: any) => {
+	// 	// SigningStargateClient
+	// 	stargateClient = await createStargateClient(lcdSigningStargateClient, offlineSigner);
+	// 	if (stargateClient) {
+	// 		console.dir(stargateClient);
+	// 	}
+	// };
 
 	const clickMnemonic = async () => {
 		if (mnemonic === '') {
 			alert('Please input Mnemonic');
 			return;
 		}
-		const wallet = await getWallet(mnemonic);
-		const accounts = await wallet.getAccounts();
-		//console.log('accounts:', accounts);
-		if (accounts && accounts.length > 0) {
-			// create client
-			stargateClient = await createStargateClient(lcdSigningStargateClient, wallet);
-			// mnemonic address
-			mnemonicAddr = accounts[0].address;
+		try {
+			const ret = await createClientByMnemonic(mnemonic, conf.client.lcd, conf.client.options);
+			client = ret.clientBundle;
+			mnemonicAddr = ret.address;
+			// update client
+			storeClient.set(ret);
+		} catch (e) {
+			alert(e);
+			return;
 		}
 	};
 
 	const clickSendToken = async () => {
-		if (!stargateClient) {
+		if (!client || !client.stargate) {
 			alert('SigningStargateClient can not be created');
 			return;
 		}
@@ -88,16 +88,18 @@
 
 		// Error: Gas price must be set in the client options when auto gas is used
 		// => set `minimum-gas-prices` in app.toml
-		const fee: StdFee = {
-			amount: [],
-			gas: '450000'
-		};
-		const res = await stargateClient.sendTokens(mnemonicAddr, receiverAddr, [amountDenom], fee);
+		console.log(`senderAddr: ${mnemonicAddr}`);
+		const res = await client.stargate.sendTokens(
+			mnemonicAddr,
+			receiverAddr,
+			[amountDenom],
+			conf.fee
+		);
 		console.log(res);
 		resSendToken = JSON.stringify(res, null, 2);
 
 		// receiver balance
-		const balance = await stargateClient.getBalance(receiverAddr, denom);
+		const balance = await client.stargate.getBalance(receiverAddr, denom);
 		receiverBalance = balance.amount;
 	};
 </script>
@@ -138,13 +140,7 @@
 			<div class="input-group">
 				<label for="inputLCD" class="col-sm-3 col-form-label">StargateClient LCP:</label>
 				<div class="col-sm-9">
-					<input
-						type="text"
-						class="form-control"
-						id="inputLCD"
-						value={lcdSigningStargateClient}
-						readonly
-					/>
+					<input type="text" class="form-control" id="inputLCD" value={conf.client.lcd} readonly />
 				</div>
 			</div>
 

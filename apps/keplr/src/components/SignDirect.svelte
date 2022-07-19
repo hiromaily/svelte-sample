@@ -3,12 +3,12 @@
 	import type { SignDoc } from '$codec/cosmos/tx/v1beta1/tx';
 	import { Coin } from '$codec/cosmos/base/v1beta1/coin';
 	import { updateAddress } from '$lib/address';
-	import { defaultChainID } from '$lib/config';
+	import { conf } from '$lib/config';
 	import { storeChainID } from '$lib/store';
-	import { newMsgTransfer, buildSignDocWithMsgTransfer } from '$lib/msg';
+	import { newMsgTransfer, buildSignDocWithMsgTransfer } from '$lib/cosmos/msg';
 	//import { Buffer } from 'buffer';
 
-	let chainId = defaultChainID; // use writable stores with chainID, [https://svelte.dev/tutorial/writable-stores]
+	let chainId = conf.chainID; // use writable stores with chainID, [https://svelte.dev/tutorial/writable-stores]
 
 	// UI related
 	let sender = '';
