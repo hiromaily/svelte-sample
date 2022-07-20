@@ -39,18 +39,18 @@ export const conf: Config = {
 	users: {
 		admin: {
 			nemonic:
-				'hello creek grace lyrics remember struggle clip prosper donate flip moment bird humor army apology mix salute become bonus make satisfy erase stone claw',
-			address: 'cosmos1jpdsvx37tmh5ugrfgghq5y0c9r4720cmtxlcr8'
+				'chat jazz tissue energy honey reason erase cart cup mad lazy inhale found party address ankle broken twelve cabbage imitate whale inflict reason ordinary',
+			address: 'cosmos1z7jaakpgg4zutlmkguaxmykjwtfjwdgdutfghr'
 		},
 		alice: {
 			nemonic:
 				'badge net govern soldier future dash eyebrow end decade fuel hedgehog atom proud enforce diamond leader shaft order miss impose noble symptom time casino',
-			address: 'cosmos1cc6zlw8dywmea0q6gjh59d4vzhev35seqrqvjg'
+			address: 'cosmos1v03y42te0vzq2q268y5sn3z8v5grhe67x7w0dz'
 		},
 		bob: {
 			nemonic:
 				'abandon nurse dash intact wagon stuff faint tube scatter square lock drop input fantasy obscure twist estate enforce inherit grocery scale liquid curtain art',
-			address: 'cosmos19hxerftq5ca5esvceuc7plc30xnl4k60z7hvkj'
+			address: 'cosmos18vllfa5ug2a0j8487clxqjh55c0w8dmgfgwrtu'
 		}
 	},
 	fee: {

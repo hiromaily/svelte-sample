@@ -76,6 +76,7 @@
 			console.log('hogehoge:', resContractTx2);
 		}
 	};
+
 	const clickSendInitiateTx = async () => {
 		if (!client || !client.stargate) {
 			console.log('client is not ready');
@@ -91,47 +92,13 @@
 		const account = createAccount(conf.users['alice'].address);
 		// create MsgInitiateTx
 		const msg = newMsgInitiateTx(lightHeight, chainId, account, ctxs, undefined);
-
 		const memo = '';
-		const fee: StdFee = {
-			amount: [],
-			gas: '450000'
-		};
-		// create rawTx
-		// FIXME: Failed to retrieve account from signer
-		// => use signerAddress related to wallet of client
-		// FIXME: Unregistered type url: cross.core.initiator.MsgInitiateTx
-		// => call register for type of message
-		//client.stargate.registry.register(msg.$type, MsgInitiateTx as GeneratedType);
 
-		// const txRaw = await client.stargate.sign(
-		// 	senderAddr,
-		// 	[msgInitiateTxtoEncodeObject(msg)],
-		// 	fee,
-		// 	memo
-		// );
-		// const signedBytes = Uint8Array.from(TxRaw.encode(txRaw).finish());
-
-		//debug
-		//console.log(TxRaw.toJSON(txRaw));
-		//"CuMDCiMvY3Jvc3MuY29yZS5pbml0aWF0b3IuTXNnSW5pdGlhdGVUeBK7AwoEaWJjMBCi/bWvoTAYASKsAQodChsvY3Jvc3MuY29yZS54Y2MuQ2hhbm5lbEluZm8SMwotY29zbW9zMWM3eXZ1d2NwbGN0YTY4bHo2cjV4cmVtY2hqempsbDNldXkyeXo5EgIIARpUeyJtZXRob2QiOiJ0cmFuc2ZlciIsImFyZ3MiOlsiY29zbW9zMTJ3enV5djhuc2U4anNwaHQzeDZwNmRnN3MwNHk4anp4anUwbDVsIiwiMTAwIl19IgAiwAEKMQobL2Nyb3NzLmNvcmUueGNjLkNoYW5uZWxJbmZvEhIKBWNyb3NzEgljaGFubmVsLTASMwotY29zbW9zMTJ3enV5djhuc2U4anNwaHQzeDZwNmRnN3MwNHk4anp4anUwbDVsEgIIARpUeyJtZXRob2QiOiJ0cmFuc2ZlciIsImFyZ3MiOlsiY29zbW9zMWM3eXZ1d2NwbGN0YTY4bHo2cjV4cmVtY2hqempsbDNldXkyeXo5IiwiMTAwIl19IgAqMwotY29zbW9zMWM3eXZ1d2NwbGN0YTY4bHo2cjV4cmVtY2hqempsbDNldXkyeXo5EgIIATIDEOgH"
-		// console.log(AuthInfo.decode(txRaw.authInfoBytes));
-		// console.log(TxBody.decode(txRaw.bodyBytes));
-
-		// build tx with msg
-		//const tx = buildTxWithMsgInitiate(msg);
-		//if (!tx) return;
-
-		// send tx (Uint8Array)
-		// FIXME: Error: Broadcasting transaction failed with code 2 (codespace: sdk).
-		//  - Log: unable to resolve type URL cross.core.initiator.MsgInitiateTx: tx parse error
-		// https://github.com/cosmos/cosmos-sdk/blob/6f070623741fe0d6851d79ada41e6e2b1c67e236/codec/types/interface_registry.go
-		//const res = await client.stargate.broadcastTx(signedBytes);
 		console.log(`senderAddr: ${senderAddr}`);
 		const res = await client.stargate.signAndBroadcast(
 			senderAddr,
 			[msgInitiateTxtoEncodeObject(msg)],
-			fee,
+			conf.fee,
 			memo
 		);
 		console.log('clickSendInitiateTx(7)');
