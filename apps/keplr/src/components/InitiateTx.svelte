@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import Long from 'long';
-	import type { StdFee } from '@cosmjs/stargate';
 	import { storeClient } from '$lib/store';
 	import { conf } from '$lib/config';
 	import type { ClientBundle } from '$lib/cosmos/client';
@@ -88,8 +87,8 @@
 		if (ctx) ctxs.push(ctx);
 		if (ctx2) ctxs.push(ctx2);
 
-		// get signer by alice
-		const account = createAccount(conf.users['alice'].address);
+		// get signer by alice -> it may mean, wallet must be created from alice's nemonic
+		const account = createAccount(conf.users['admin'].address);
 		// create MsgInitiateTx
 		const msg = newMsgInitiateTx(lightHeight, chainId, account, ctxs, undefined);
 		const memo = '';
