@@ -38,6 +38,7 @@ const createClientBundle = async (
 	};
 };
 
+// Note: this function could be error
 const createTendermintClient = async (lcd: string): Promise<Tendermint34Client> => {
 	return await Tendermint34Client.connect(lcd);
 };
@@ -74,6 +75,7 @@ const createClientByMnemonic = async (
 		return Promise.reject(new Error('failed to create client'));
 	}
 	// create client
+	// Note: createClientBundle could be error
 	const client = await createClientBundle(lcd, wallet, options);
 	return {
 		clientBundle: client,

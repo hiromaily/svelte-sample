@@ -14,7 +14,7 @@
 			// update client
 			storeClient.set(client);
 		} catch (e) {
-			console.log(e);
+			console.error(`fail to call createClientByMnemonic(): ${e}`);
 			return;
 		}
 	})();

@@ -48,7 +48,8 @@
 		"protobufjs": "^6.11.3",
 		"secretjs": "^0.17.5",
 		"snakecase-keys": "^5.4.2",
-		"strip-hex-prefix": "^1.0.0"
+		"strip-hex-prefix": "^1.0.0",
+		"svelte-spa-router": "^3.3.0"
 	},
 	"overrides": {
 		"rollup": "2.76.0"

@@ -20,9 +20,13 @@
 		storeChainID.subscribe((value) => {
 			chainId = value;
 			// update address
-			updateKeplrAddress(chainId).then((res) => {
-				address = res.address;
-			});
+			updateKeplrAddress(chainId)
+				.then((res) => {
+					address = res.address;
+				})
+				.catch((e) => {
+					console.error(`fail to call updateKeplrAddress(): ${e}`);
+				});
 		});
 	});
 
