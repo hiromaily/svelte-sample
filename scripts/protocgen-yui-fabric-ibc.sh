@@ -34,16 +34,16 @@ sed -i -e 's/import * as _m0/import _m0/' ${OUT_DIR}commitment/types.ts
 # import * as _m0 from "protobufjs/minimal";
 # import _m0 from 'protobufjs/minimal.js';
 
-rm -rf ./apps/keplr/src/codec/yui-fabric-ibc
-mkdir -p ./apps/keplr/src/codec/yui-fabric-ibc
+rm -rf ./apps/wallet/src/codec/yui-fabric-ibc
+mkdir -p ./apps/wallet/src/codec/yui-fabric-ibc
 
 # TODO: copy only required files
-mv ${OUT_DIR}app ./apps/keplr/src/codec/yui-fabric-ibc/
-mv ${OUT_DIR}commitment ./apps/keplr/src/codec/yui-fabric-ibc/
-# mkdir -p ./apps/keplr/src/codec/cross/core/client/v1/; mv ${OUT_DIR}ibc/core/client/v1/client.ts $_
-# mkdir -p ./apps/keplr/src/codec/cross/applications/transfer/v1/; mv ${OUT_DIR}ibc/applications/transfer/v1/tx.ts $_
+mv ${OUT_DIR}app ./apps/wallet/src/codec/yui-fabric-ibc/
+mv ${OUT_DIR}commitment ./apps/wallet/src/codec/yui-fabric-ibc/
+# mkdir -p ./apps/wallet/src/codec/cross/core/client/v1/; mv ${OUT_DIR}ibc/core/client/v1/client.ts $_
+# mkdir -p ./apps/wallet/src/codec/cross/applications/transfer/v1/; mv ${OUT_DIR}ibc/applications/transfer/v1/tx.ts $_
 
 # Remove unnecessary codec files
 rm -rf ./tmp
-rm -rf ./apps/keplr/src/codec/yui-fabric-ibc/app/types.ts-e
-rm -rf ./apps/keplr/src/codec/yui-fabric-ibc/commitment/types.ts-e
+rm -rf ./apps/wallet/src/codec/yui-fabric-ibc/app/types.ts-e
+rm -rf ./apps/wallet/src/codec/yui-fabric-ibc/commitment/types.ts-e

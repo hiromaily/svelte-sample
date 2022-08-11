@@ -1,3 +1,9 @@
+# Note: Apple Silicon Mac need to set the following environment variable
+#npm_config_target_arch:=x64
+.PHONY: npm-apple-silicon
+npm-apple-silicon:
+	export npm_config_target_arch=x64 && \
+	npm install
 
 .PHONY: get-cosmos-proto
 get-cosmos-proto:

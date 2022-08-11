@@ -45,28 +45,28 @@ mkdir -p ${OUT_DIR}
    "$THIRD_PARTY_PROTO_DIR/tendermint/types/validator.proto" \
    "$THIRD_PARTY_PROTO_DIR/tendermint/version/types.proto"
 
-rm -rf ./apps/keplr/src/codec/cosmos
-mkdir -p ./apps/keplr/src/codec/cosmos/tx \
-  ./apps/keplr/src/codec/cosmos/crypto \
-  ./apps/keplr/src/codec/cosmos/base \
-  ./apps/keplr/src/codec/cosmos/upgrade
+rm -rf ./apps/wallet/src/codec/cosmos
+mkdir -p ./apps/wallet/src/codec/cosmos/tx \
+  ./apps/wallet/src/codec/cosmos/crypto \
+  ./apps/wallet/src/codec/cosmos/base \
+  ./apps/wallet/src/codec/cosmos/upgrade
 
-rm -rf ./apps/keplr/src/codec/tendermint
-mkdir -p ./apps/keplr/src/codec/tendermint
+rm -rf ./apps/wallet/src/codec/tendermint
+mkdir -p ./apps/wallet/src/codec/tendermint
 
-# mv ${OUT_DIR}cosmos/tx ./apps/keplr/src/codec/cosmos/
-# mv ${OUT_DIR}cosmos/crypto ./apps/keplr/src/codec/cosmos/
-# mv ${OUT_DIR}cosmos/base ./apps/keplr/src/codec/cosmos/
-# mv ${OUT_DIR}cosmos/upgrade ./apps/keplr/src/codec/cosmos/
+# mv ${OUT_DIR}cosmos/tx ./apps/wallet/src/codec/cosmos/
+# mv ${OUT_DIR}cosmos/crypto ./apps/wallet/src/codec/cosmos/
+# mv ${OUT_DIR}cosmos/base ./apps/wallet/src/codec/cosmos/
+# mv ${OUT_DIR}cosmos/upgrade ./apps/wallet/src/codec/cosmos/
 
-mkdir -p ./apps/keplr/src/codec/cosmos/base/v1beta1/; mv ${OUT_DIR}cosmos/base/v1beta1/coin.ts $_
-mkdir -p ./apps/keplr/src/codec/cosmos/upgrade/v1beta1/; mv ${OUT_DIR}cosmos/upgrade/v1beta1/upgrade.ts $_
-mkdir -p ./apps/keplr/src/codec/cosmos/tx/v1beta1/; mv ${OUT_DIR}cosmos/tx/v1beta1/tx.ts $_
-mkdir -p ./apps/keplr/src/codec/cosmos/tx/signing/v1beta1/; mv ${OUT_DIR}cosmos/tx/signing/v1beta1/signing.ts $_
-mkdir -p ./apps/keplr/src/codec/cosmos/crypto/multisig/v1beta1/; mv ${OUT_DIR}cosmos/crypto/multisig/v1beta1/multisig.ts $_
-mkdir -p ./apps/keplr/src/codec/cosmos/crypto/secp256k1/; mv ${OUT_DIR}cosmos/crypto/secp256k1/keys.ts $_
+mkdir -p ./apps/wallet/src/codec/cosmos/base/v1beta1/; mv ${OUT_DIR}cosmos/base/v1beta1/coin.ts $_
+mkdir -p ./apps/wallet/src/codec/cosmos/upgrade/v1beta1/; mv ${OUT_DIR}cosmos/upgrade/v1beta1/upgrade.ts $_
+mkdir -p ./apps/wallet/src/codec/cosmos/tx/v1beta1/; mv ${OUT_DIR}cosmos/tx/v1beta1/tx.ts $_
+mkdir -p ./apps/wallet/src/codec/cosmos/tx/signing/v1beta1/; mv ${OUT_DIR}cosmos/tx/signing/v1beta1/signing.ts $_
+mkdir -p ./apps/wallet/src/codec/cosmos/crypto/multisig/v1beta1/; mv ${OUT_DIR}cosmos/crypto/multisig/v1beta1/multisig.ts $_
+mkdir -p ./apps/wallet/src/codec/cosmos/crypto/secp256k1/; mv ${OUT_DIR}cosmos/crypto/secp256k1/keys.ts $_
 
-mv ${OUT_DIR}tendermint ./apps/keplr/src/codec/
+mv ${OUT_DIR}tendermint ./apps/wallet/src/codec/
 
 # Remove unnecessary codec files
-rm -rf ./tmp
+#rm -rf ./tmp

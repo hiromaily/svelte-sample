@@ -1,5 +1,6 @@
 .vscode/
 node_modules/
 tendermint/
+!apps/wallet/src/codec/tendermint/
 testnet/
 tmp/

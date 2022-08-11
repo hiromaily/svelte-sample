@@ -2,11 +2,11 @@
 
 ## apps
 
-- [keplr wallet](./apps/keplr/)
+- [wallet](./apps/wallet/)
 
 ## sites
 
-- [keplr wallet on the web](https://hiromaily.github.io/wallet-demo-using-svelte/web/keplr/)
+- [wallet on the web](https://hiromaily.github.io/wallet-demo-using-svelte/web/wallet/)
 
 ## About Svelte
 

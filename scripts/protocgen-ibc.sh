@@ -28,11 +28,11 @@ done
 # sed -i -e 's/..\/typeRegistry/@src\/codec\/typeRegistry/' ${OUT_DIR}app/types.ts
 # sed -i -e 's/..\/typeRegistry/@src\/codec\/typeRegistry/' ${OUT_DIR}commitment/types.ts
 
-rm -rf ./apps/keplr/src/codec/ibc
-mkdir -p ./apps/keplr/src/codec/ibc
+rm -rf ./apps/wallet/src/codec/ibc
+mkdir -p ./apps/wallet/src/codec/ibc
 
-mkdir -p ./apps/keplr/src/codec/ibc/core/client/v1/; mv ${OUT_DIR}ibc/core/client/v1/client.ts $_
-mkdir -p ./apps/keplr/src/codec/ibc/applications/transfer/v1/; mv ${OUT_DIR}ibc/applications/transfer/v1/tx.ts $_
+mkdir -p ./apps/wallet/src/codec/ibc/core/client/v1/; mv ${OUT_DIR}ibc/core/client/v1/client.ts $_
+mkdir -p ./apps/wallet/src/codec/ibc/applications/transfer/v1/; mv ${OUT_DIR}ibc/applications/transfer/v1/tx.ts $_
 
 # Remove unnecessary codec files
 rm -rf ./tmp

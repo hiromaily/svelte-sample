@@ -25,15 +25,15 @@ for dir in $proto_dirs; do
   $(find "${dir}" -maxdepth 1 -name '*.proto')
 done
 
-rm -rf ./apps/keplr/src/codec/cross
-mkdir -p ./apps/keplr/src/codec/cross
+rm -rf ./apps/wallet/src/codec/cross
+mkdir -p ./apps/wallet/src/codec/cross
 
-mkdir -p ./apps/keplr/src/codec/cross/core/auth/; mv ${OUT_DIR}cross/core/auth/types.ts $_
-mkdir -p ./apps/keplr/src/codec/cross/core/initiator/; mv ${OUT_DIR}cross/core/initiator/types.ts $_
+mkdir -p ./apps/wallet/src/codec/cross/core/auth/; mv ${OUT_DIR}cross/core/auth/types.ts $_
+mkdir -p ./apps/wallet/src/codec/cross/core/initiator/; mv ${OUT_DIR}cross/core/initiator/types.ts $_
 mv ${OUT_DIR}cross/core/initiator/msgs.ts $_
 mv ${OUT_DIR}cross/core/initiator/query.ts $_
-mkdir -p ./apps/keplr/src/codec/cross/core/tx/; mv ${OUT_DIR}cross/core/tx/types.ts $_
-mkdir -p ./apps/keplr/src/codec/cross/core/xcc/; mv ${OUT_DIR}cross/core/xcc/types.ts $_
+mkdir -p ./apps/wallet/src/codec/cross/core/tx/; mv ${OUT_DIR}cross/core/tx/types.ts $_
+mkdir -p ./apps/wallet/src/codec/cross/core/xcc/; mv ${OUT_DIR}cross/core/xcc/types.ts $_
 
 # Remove unnecessary codec files
 rm -rf ./tmp
