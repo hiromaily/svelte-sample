@@ -19,8 +19,9 @@
 			class="form-select"
 			aria-label="ChainID"
 		>
-			<option value={conf.chainID}>{conf.chainID}</option>
-			<option value="cosmoshub-4">cosmoshub-4</option>
+			{#each conf.chainIDs as chainID}
+				<option value={chainID}>{chainID}</option>
+			{/each}
 		</select>
 	</div>
 </div>

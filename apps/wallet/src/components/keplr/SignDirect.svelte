@@ -2,13 +2,13 @@
 	import { onMount } from 'svelte';
 	import type { SignDoc } from '$codec/cosmos/tx/v1beta1/tx';
 	import { Coin } from '$codec/cosmos/base/v1beta1/coin';
-	import { updateAddress } from '$lib/address';
+	import { updateKeplrAddress } from '$lib/address';
 	import { conf } from '$lib/config';
 	import { storeChainID } from '$lib/store';
 	import { newMsgTransfer, buildSignDocWithMsgTransfer } from '$lib/cosmos/msg';
 	//import { Buffer } from 'buffer';
 
-	let chainId = conf.chainID; // use writable stores with chainID, [https://svelte.dev/tutorial/writable-stores]
+	let chainId = conf.chainIDs[0]; // use writable stores with chainID, [https://svelte.dev/tutorial/writable-stores]
 
 	// UI related
 	let sender = '';
@@ -19,11 +19,11 @@
 
 	// initialization
 	onMount(async () => {
-		//sender = await updateAddress(chainId);
+		//sender = await updateKeplrAddress(chainId);
 		storeChainID.subscribe((value) => {
 			chainId = value;
 			// update address
-			updateAddress(chainId).then((res) => {
+			updateKeplrAddress(chainId).then((res) => {
 				sender = res.address;
 			});
 		});

@@ -5,9 +5,9 @@ export interface AddressSigner {
 	offlineSigner: any; // FIXME: any
 }
 
-// updateAddress is called after chainID updated.
+// updateKeplrAddress is called after chainID updated.
 // based on keplr
-const updateAddress = async (chainID: string): Promise<AddressSigner> => {
+const updateKeplrAddress = async (chainID: string): Promise<AddressSigner> => {
 	await window.keplr!.enable(chainID);
 	const offlineSigner = window.getOfflineSigner!(chainID);
 	const account = (await offlineSigner.getAccounts())[0];
@@ -22,4 +22,4 @@ const getWallet = async (mnemonic: string): Promise<DirectSecp256k1HdWallet> => 
 	return await DirectSecp256k1HdWallet.fromMnemonic(mnemonic);
 };
 
-export { updateAddress, getWallet };
+export { updateKeplrAddress, getWallet };

@@ -28,7 +28,7 @@
 		// storeChainID.subscribe((value) => {
 		// 	chainId = value;
 		// 	// update address
-		// 	updateAddress(chainId)
+		// 	updateKeplrAddress(chainId)
 		// 		.then((res) => {
 		// 			//address = res.address;
 		// 			return res.offlineSigner;

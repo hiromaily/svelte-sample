@@ -1,11 +1,11 @@
 <script lang="ts">
 	//import { Window as KeplrWindow } from '@keplr-wallet/types';
-	import Header from '$components/Header.svelte';
-	import ChainID from '$components/ChainID.svelte';
-	import SignArbitrary from '$components/SignArbitrary.svelte';
-	import SignDirect from '$components/SignDirect.svelte';
-	import Clients from '$components/Clients.svelte';
-	import InitiateTx from '$components/InitiateTx.svelte';
+	import Header from '$components/keplr/Header.svelte';
+	import ChainID from '$components/keplr/ChainID.svelte';
+	import SignArbitrary from '$components/keplr/SignArbitrary.svelte';
+	import SignDirect from '$components/keplr/SignDirect.svelte';
+	import Clients from '$components/keplr/Clients.svelte';
+	import InitiateTx from '$components/keplr/InitiateTx.svelte';
 	import { onMount } from 'svelte';
 
 	// declare global {

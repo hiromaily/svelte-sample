@@ -19,7 +19,7 @@ export interface Client {
 }
 
 export interface Config {
-	chainID: string;
+	chainIDs: string[];
 	client: Client;
 	users: Users;
 	fee: StdFee;
@@ -31,7 +31,7 @@ registry.register(`/${MsgInitiateTx.$type}`, MsgInitiateTx as GeneratedType);
 registry.register(MsgInitiateTx.$type, MsgInitiateTx as GeneratedType);
 
 export const conf: Config = {
-	chainID: 'cosmoshub',
+	chainIDs: ['cosmoshub', 'cosmoshub-4'],
 	client: {
 		lcd: 'http://localhost:26657',
 		options: { registry: registry }

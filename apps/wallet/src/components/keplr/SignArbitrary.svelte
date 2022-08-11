@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	//import { fromBase64 } from '@cosmjs/encoding';
-	import { updateAddress } from '$lib/address';
+	import { updateKeplrAddress } from '$lib/address';
 	import { conf } from '$lib/config';
 	import { storeChainID } from '$lib/store';
 
@@ -9,18 +9,18 @@
 	// import { DirectSecp256k1HdWallet } from '@cosmjs/proto-signing';
 	// import { SigningStargateClient } from '@cosmjs/stargate';
 
-	let chainId = conf.chainID; // use writable stores with chainID [https://svelte.dev/tutorial/writable-stores]
+	let chainId = conf.chainIDs[0]; // use writable stores with chainID [https://svelte.dev/tutorial/writable-stores]
 	let address = '';
 	// UI related
 	let signature = 'result';
 
 	// initialization
 	onMount(async () => {
-		//address = await updateAddress(chainId);
+		//address = await updateKeplrAddress(chainId);
 		storeChainID.subscribe((value) => {
 			chainId = value;
 			// update address
-			updateAddress(chainId).then((res) => {
+			updateKeplrAddress(chainId).then((res) => {
 				address = res.address;
 			});
 		});
