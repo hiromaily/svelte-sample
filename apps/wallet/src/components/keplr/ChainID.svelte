@@ -19,7 +19,7 @@
 			class="form-select"
 			aria-label="ChainID"
 		>
-			{#each conf.chainIDs as chainID}
+			{#each conf.keplr.chainIDs as chainID}
 				<option value={chainID}>{chainID}</option>
 			{/each}
 		</select>

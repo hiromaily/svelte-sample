@@ -8,7 +8,7 @@
 	import { newMsgTransfer, buildSignDocWithMsgTransfer } from '$lib/cosmos/msg';
 	//import { Buffer } from 'buffer';
 
-	let chainId = conf.chainIDs[0]; // use writable stores with chainID, [https://svelte.dev/tutorial/writable-stores]
+	let chainId = conf.keplr.chainIDs[0]; // use writable stores with chainID, [https://svelte.dev/tutorial/writable-stores]
 
 	// UI related
 	let sender = '';

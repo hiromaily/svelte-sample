@@ -60,16 +60,26 @@
 
 		// contract A
 		const amout = 100;
-		let callInfo = `{"method":"transfer","args":["${conf.users['bob'].address}","${amout}"]}`;
-		ctx = await createContractTxForUI(client, conf.users['alice'].address, callInfo, undefined);
+		let callInfo = `{"method":"transfer","args":["${conf.keplr.users['bob'].address}","${amout}"]}`;
+		ctx = await createContractTxForUI(
+			client,
+			conf.keplr.users['alice'].address,
+			callInfo,
+			undefined
+		);
 		if (ctx) {
 			resContractTx = createContractTxJSON(ctx);
 			console.log(resContractTx);
 		}
 
 		// contract B
-		callInfo = `{"method":"transfer","args":["${conf.users['alice'].address}","${amout}"]}`;
-		ctx2 = await createContractTxForUI(client, conf.users['bob'].address, callInfo, chainChannel);
+		callInfo = `{"method":"transfer","args":["${conf.keplr.users['alice'].address}","${amout}"]}`;
+		ctx2 = await createContractTxForUI(
+			client,
+			conf.keplr.users['bob'].address,
+			callInfo,
+			chainChannel
+		);
 		if (ctx2) {
 			resContractTx2 = createContractTxJSON(ctx2);
 			console.log('hogehoge:', resContractTx2);
@@ -88,7 +98,7 @@
 		if (ctx2) ctxs.push(ctx2);
 
 		// get signer by alice -> it may mean, wallet must be created from alice's nemonic
-		const account = createAccount(conf.users['admin'].address);
+		const account = createAccount(conf.keplr.users['admin'].address);
 		// create MsgInitiateTx
 		const msg = newMsgInitiateTx(lightHeight, chainId, account, ctxs, undefined);
 		const memo = '';
@@ -97,7 +107,7 @@
 		const res = await client.stargate.signAndBroadcast(
 			senderAddr,
 			[msgInitiateTxtoEncodeObject(msg)],
-			conf.fee,
+			conf.keplr.fee,
 			memo
 		);
 		console.log('clickSendInitiateTx(7)');

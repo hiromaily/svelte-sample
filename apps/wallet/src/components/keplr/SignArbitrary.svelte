@@ -9,7 +9,7 @@
 	// import { DirectSecp256k1HdWallet } from '@cosmjs/proto-signing';
 	// import { SigningStargateClient } from '@cosmjs/stargate';
 
-	let chainId = conf.chainIDs[0]; // use writable stores with chainID [https://svelte.dev/tutorial/writable-stores]
+	let chainId = conf.keplr.chainIDs[0]; // use writable stores with chainID [https://svelte.dev/tutorial/writable-stores]
 	let address = '';
 	// UI related
 	let signature = 'result';

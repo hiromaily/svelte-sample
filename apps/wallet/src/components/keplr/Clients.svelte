@@ -8,9 +8,9 @@
 	let client: ClientBundle | undefined;
 
 	// UI related
-	let mnemonic = conf.users['admin'].nemonic;
+	let mnemonic = conf.keplr.users['admin'].nemonic;
 	let mnemonicAddr = '';
-	let receiverAddr = conf.users['alice'].address; // created by alpha CLI (https://github.com/datachainlab/fabric-tendermint-cross-demo)
+	let receiverAddr = conf.keplr.users['alice'].address; // created by alpha CLI (https://github.com/datachainlab/fabric-tendermint-cross-demo)
 	let amount = '100';
 	let denom = 'samoleans';
 	let resSendToken = '';
@@ -54,7 +54,11 @@
 			return;
 		}
 		try {
-			const ret = await createClientByMnemonic(mnemonic, conf.client.lcd, conf.client.options);
+			const ret = await createClientByMnemonic(
+				mnemonic,
+				conf.keplr.client.lcd,
+				conf.keplr.client.options
+			);
 			client = ret.clientBundle;
 			mnemonicAddr = ret.address;
 			// update client
@@ -140,7 +144,13 @@
 			<div class="input-group">
 				<label for="inputLCD" class="col-sm-3 col-form-label">StargateClient LCP:</label>
 				<div class="col-sm-9">
-					<input type="text" class="form-control" id="inputLCD" value={conf.client.lcd} readonly />
+					<input
+						type="text"
+						class="form-control"
+						id="inputLCD"
+						value={conf.keplr.client.lcd}
+						readonly
+					/>
 				</div>
 			</div>
 

@@ -7,9 +7,9 @@
 	(async () => {
 		try {
 			const client = await createClientByMnemonic(
-				conf.users['admin'].nemonic,
-				conf.client.lcd,
-				conf.client.options
+				conf.keplr.users['admin'].nemonic,
+				conf.keplr.client.lcd,
+				conf.keplr.client.options
 			);
 			// update client
 			storeClient.set(client);

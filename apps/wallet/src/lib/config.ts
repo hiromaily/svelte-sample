@@ -19,10 +19,15 @@ export interface Client {
 }
 
 export interface Config {
-	chainIDs: string[];
-	client: Client;
-	users: Users;
-	fee: StdFee;
+	server: {
+		urlPath: string;
+	};
+	keplr: {
+		chainIDs: string[];
+		client: Client;
+		users: Users;
+		fee: StdFee;
+	};
 }
 
 // registry for client
@@ -31,31 +36,36 @@ registry.register(`/${MsgInitiateTx.$type}`, MsgInitiateTx as GeneratedType);
 registry.register(MsgInitiateTx.$type, MsgInitiateTx as GeneratedType);
 
 export const conf: Config = {
-	chainIDs: ['cosmoshub', 'cosmoshub-4'],
-	client: {
-		lcd: 'http://localhost:26657',
-		options: { registry: registry }
+	server: {
+		urlPath: '/wallet-demo-using-svelte/web/wallet'
 	},
-	users: {
-		admin: {
-			nemonic:
-				'chat jazz tissue energy honey reason erase cart cup mad lazy inhale found party address ankle broken twelve cabbage imitate whale inflict reason ordinary',
-			address: 'cosmos1z7jaakpgg4zutlmkguaxmykjwtfjwdgdutfghr'
+	keplr: {
+		chainIDs: ['cosmoshub', 'cosmoshub-4'],
+		client: {
+			lcd: 'http://localhost:26657',
+			options: { registry: registry }
 		},
-		alice: {
-			nemonic:
-				'badge net govern soldier future dash eyebrow end decade fuel hedgehog atom proud enforce diamond leader shaft order miss impose noble symptom time casino',
-			address: 'cosmos1v03y42te0vzq2q268y5sn3z8v5grhe67x7w0dz'
+		users: {
+			admin: {
+				nemonic:
+					'chat jazz tissue energy honey reason erase cart cup mad lazy inhale found party address ankle broken twelve cabbage imitate whale inflict reason ordinary',
+				address: 'cosmos1z7jaakpgg4zutlmkguaxmykjwtfjwdgdutfghr'
+			},
+			alice: {
+				nemonic:
+					'badge net govern soldier future dash eyebrow end decade fuel hedgehog atom proud enforce diamond leader shaft order miss impose noble symptom time casino',
+				address: 'cosmos1v03y42te0vzq2q268y5sn3z8v5grhe67x7w0dz'
+			},
+			bob: {
+				nemonic:
+					'abandon nurse dash intact wagon stuff faint tube scatter square lock drop input fantasy obscure twist estate enforce inherit grocery scale liquid curtain art',
+				address: 'cosmos18vllfa5ug2a0j8487clxqjh55c0w8dmgfgwrtu'
+			}
 		},
-		bob: {
-			nemonic:
-				'abandon nurse dash intact wagon stuff faint tube scatter square lock drop input fantasy obscure twist estate enforce inherit grocery scale liquid curtain art',
-			address: 'cosmos18vllfa5ug2a0j8487clxqjh55c0w8dmgfgwrtu'
+		fee: {
+			amount: [],
+			gas: '450000'
 		}
-	},
-	fee: {
-		amount: [],
-		gas: '450000'
 	}
 };
 

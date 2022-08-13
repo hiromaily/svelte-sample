@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Top from '$components/Top.svelte';
+	import Metamask from '$components/Metamask.svelte';
 </script>
 
 <svelte:head>
@@ -15,4 +16,6 @@
 <div>
 	<!-- Top component -->
 	<Top />
+	<!-- Metamask component -->
+	<Metamask />
 </div>
