@@ -8,8 +8,6 @@
 	onMount(() => {
 		if (typeof window.ethereum !== 'undefined' && window.ethereum.isMetaMask) {
 			console.log('MetaMask is installed!');
-			console.log(`networkVersion: ${window.ethereum.networkVersion}`); // 1
-			console.log(`selectedAddress: ${window.ethereum.selectedAddress}`); // null
 		} else {
 			alert('Please install metamask extension');
 		}
