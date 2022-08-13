@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="/wallet-demo-using-svelte/web/wallet/favicon.png" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta http-equiv="content-security-policy" content=""><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous" data-svelte="svelte-1pako0c">
+	<link rel="stylesheet" href="/wallet-demo-using-svelte/web/wallet/app/immutable/assets/pages/keplr.svelte-fc1020b8.css">
+	<link rel="modulepreload" href="/wallet-demo-using-svelte/web/wallet/app/immutable/start-32bdd607.js">
+	<link rel="modulepreload" href="/wallet-demo-using-svelte/web/wallet/app/immutable/chunks/index-6e8b5e9e.js">
+	<link rel="modulepreload" href="/wallet-demo-using-svelte/web/wallet/app/immutable/chunks/index-5ea9d8bc.js">
+	<link rel="modulepreload" href="/wallet-demo-using-svelte/web/wallet/app/immutable/layout.svelte-0406ee6c.js">
+	<link rel="modulepreload" href="/wallet-demo-using-svelte/web/wallet/app/immutable/pages/keplr.svelte-4cbbd7db.js">
+	<link rel="modulepreload" href="/wallet-demo-using-svelte/web/wallet/app/immutable/chunks/Top-d7ef86f7.js">
+	</head>
+	<body>
+		<div>
+
+
+
+
+<div>
+	<div>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light"><div class="container-fluid"><a class="navbar-brand" href="/wallet-demo-using-svelte/web/wallet/">Wallet</a>
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+		<div class="collapse navbar-collapse" id="navbarNavAltMarkup"><div class="navbar-nav"><a class="nav-link active" aria-current="page" href="/wallet-demo-using-svelte/web/wallet/">Top</a>
+				<a class="nav-link" href="/wallet-demo-using-svelte/web/wallet/metamask">Metamask</a>
+				<a class="nav-link" href="/wallet-demo-using-svelte/web/wallet/keplr">Keplr</a></div></div></div></nav></div>
+	
+	<div class="mb-5"><h3 class="text-bg-primary p-3">Keplr Wallet</h3>
+	
+	
+	
+	<div class="mx-3 mt-4 row"><label for="chainid" class="col-sm-3 col-form-label">ChainID:</label>
+	<div class="col-sm-9"><select name="chainid" id="chainid" class="form-select" aria-label="ChainID"><option value="cosmoshub">cosmoshub</option><option value="cosmoshub-4">cosmoshub-4</option></select></div></div>
+	
+	<div class="mx-3 mt-4"><h4>signArbitrary</h4>
+	<div class="mx-3"><div class="form-floating"><textarea type="input" class="form-control svelte-22rg74" id="messageArbitrary" placeholder="message"></textarea>
+			<label for="message">message</label>
+			<div class="mt-2"><button type="button" class="btn btn-primary" name="send" style="width: 100px;">Sign
+				</button></div></div>
+		<div class="mt-4"><h5>signature</h5>
+			<div class="p-3 border bg-light text-muted">result</div></div></div>
+</div>
+	
+	<div class="mx-3 mt-4"><h4>signDirect<span style="padding-left: 20px;font-size:medium;">(sign on MsgTransfer)</span></h4>
+
+	<div class="mx-3"><div class="row"><label for="inputSender" class="col-sm-3 col-form-label">Sender (Keplr address):</label>
+			<div class="col-sm-9"><input type="text" class="form-control" id="inputSender" value="" readonly></div>
+			<label for="inputReceiver" class="col-sm-3 col-form-label">Receiver (dummy):</label>
+			<div class="col-sm-9"><input type="text" class="form-control" id="inputReceiver" value="cosmos1ca0zlqxjqv5gek5qxm602umtkmu88564hpyws4"></div>
+			<label for="inputPort" class="col-sm-3 col-form-label">Source Port:</label>
+			<div class="col-sm-9"><input type="text" class="form-control" id="inputPort" value="transfer"></div>
+			<label for="inputChannel" class="col-sm-3 col-form-label">Source Channel:</label>
+			<div class="col-sm-9"><input type="text" class="form-control" id="inputChannel" value="channel-0"></div>
+			<div class="col-sm-9"><button type="button" class="btn btn-primary" name="send" style="width: 100px;">Sign
+				</button></div></div>
+
+		<div class="mt-4"><h5>signature</h5>
+			<div class="p-3 border bg-light text-muted">result</div></div></div></div>
+	
+	<div class="mx-3 mt-4"><h4>SigningStargateClient</h4>
+
+	<div class="mx-3"><div class="row"><div class="input-group col-sm-9"><label for="inputMnemonic" class="col-sm-3 col-form-label">Mnemonic:</label>
+				<input type="text" id="inputMnemonic" class="form-control" placeholder="mnemonic" aria-label="mnemonic" aria-describedby="basic-addon2" value="chat jazz tissue energy honey reason erase cart cup mad lazy inhale found party address ankle broken twelve cabbage imitate whale inflict reason ordinary">
+				<div class="input-group-append"><button class="btn btn-outline-primary" type="button" style="width: 120px;">Get Address</button></div></div>
+
+			<div class="input-group"><label for="inputAddr" class="col-sm-3 col-form-label">Mnemonic address:</label>
+				<div class="col-sm-9"><input type="text" class="form-control" id="inputAddr" value="" readonly></div></div>
+
+			<div class="input-group"><label for="inputLCD" class="col-sm-3 col-form-label">StargateClient LCP:</label>
+				<div class="col-sm-9"><input type="text" class="form-control" id="inputLCD" value="http://localhost:26657" readonly></div></div>
+
+			<div class="input-group"><label for="inputReceiver" class="col-sm-3 col-form-label">Receiver address:</label>
+				<div class="col-sm-9"><input type="text" class="form-control" id="inputReceiver" value="cosmos1v03y42te0vzq2q268y5sn3z8v5grhe67x7w0dz"></div></div>
+
+			<div class="input-group"><label for="inputAmount" class="col-sm-3 col-form-label">Send Amount:</label>
+				<div class="col-sm-4"><input type="text" class="form-control input-group" id="inputAmount" placeholder="Amount" value="100"></div>
+				<div class="col-sm-1"></div>
+				<div class="col-sm-4"><input type="text" class="form-control input-group" placeholder="Denom" value="samoleans"></div></div>
+
+			<div class="col-sm-12"><button type="button" class="btn btn-primary" name="send" style="width: 120px;">Send Token
+				</button></div></div>
+
+		<div class="mt-4"><h5>Result of sendToken</h5>
+			<div class="p-3 border bg-light text-muted"><pre></pre></div></div>
+
+		<div class="row mt-4"><div class="input-group"><label for="inputBalance" class="col-sm-3 col-form-label">Receiver Balance:</label>
+				<div class="col-sm-4"><input type="text" class="form-control input-group" id="inputBalance" placeholder="Balance" value="" readonly></div>
+				<div class="col-sm-1"></div>
+				<div class="col-sm-4"><input type="text" class="form-control input-group" placeholder="Denom" value="samoleans" readonly></div></div></div></div></div>
+	
+	<div class="mx-3 mt-4"><h4>Create InitiateTx (Alice to Bob)</h4>
+	<div class="mx-3"><div class="row"><div class="input-group"><label for="inputReceiver" class="col-sm-3 col-form-label">Chain Channel:</label>
+				<div class="col-sm-9"><input type="text" class="form-control" id="inputReceiver" value="channel-0:cross"></div></div>
+
+			<div class="col-sm-12"><button type="button" class="btn btn-primary" name="send" style="width: 170px;">Create ContractTx
+				</button></div>
+
+			<div class="mt-4"><h5>Result of ContractTx1</h5>
+				<div class="p-3 border bg-light text-muted"><pre></pre></div>
+				<h5>Result of ContractTx2</h5>
+				<div class="p-3 border bg-light text-muted"><pre></pre></div></div>
+
+			<div class="col-sm-12"><button type="button" class="btn btn-primary" name="send" style="width: 170px;">Submit InitiateTx
+				</button></div></div></div></div></div></div>
+
+
+		<script type="module" data-sveltekit-hydrate="1cloz78">
+		import { start } from "/wallet-demo-using-svelte/web/wallet/app/immutable/start-32bdd607.js";
+		start({
+			target: document.querySelector('[data-sveltekit-hydrate="1cloz78"]').parentNode,
+			paths: {"base":"/wallet-demo-using-svelte/web/wallet","assets":"/wallet-demo-using-svelte/web/wallet"},
+			session: {},
+			route: true,
+			spa: false,
+			trailing_slash: "never",
+			hydrate: {
+				status: 200,
+				error: null,
+				nodes: [0, 3],
+				params: {},
+				routeId: "keplr"
+			}
+		});
+	</script></div>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+			crossorigin="anonymous"
+		></script>
+	</body>
+</html>

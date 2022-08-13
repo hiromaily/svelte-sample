@@ -31,7 +31,7 @@ build-node: clean
 # replace `_app` from js file as well
 PHONY: deploy-gitpage
 deploy-gitpage:
-	rm -rf ../../web/wallet/index.html ../../web/wallet/app
+	rm -rf ../../web/wallet/*.html ../../web/wallet/app
 	cp -r build/ ../../web/wallet/
 
 PHONY: clean

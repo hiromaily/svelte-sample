@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import Long from 'long';
-	import { storeClient } from '$lib/store';
+	import { storeClient } from '$lib/keplr/store';
 	import { conf } from '$lib/config';
 	import type { ClientBundle } from '$lib/cosmos/client';
 	import { createContractTxForUI, createContractTxJSON } from '$lib/cross/cross';

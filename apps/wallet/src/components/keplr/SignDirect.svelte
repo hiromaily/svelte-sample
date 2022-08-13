@@ -2,9 +2,9 @@
 	import { onMount } from 'svelte';
 	import type { SignDoc } from '$codec/cosmos/tx/v1beta1/tx';
 	import { Coin } from '$codec/cosmos/base/v1beta1/coin';
-	import { updateKeplrAddress } from '$lib/address';
+	import { updateKeplrAddress } from '$lib/keplr/address';
 	import { conf } from '$lib/config';
-	import { storeChainID } from '$lib/store';
+	import { storeChainID } from '$lib/keplr/store';
 	import { newMsgTransfer, buildSignDocWithMsgTransfer } from '$lib/cosmos/msg';
 	//import { Buffer } from 'buffer';
 

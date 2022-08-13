@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	//import { Window as KeplrWindow } from '@keplr-wallet/types';
 	import Header from '$components/keplr/Header.svelte';
 	import ChainID from '$components/keplr/ChainID.svelte';
@@ -6,7 +7,6 @@
 	import SignDirect from '$components/keplr/SignDirect.svelte';
 	import Clients from '$components/keplr/Clients.svelte';
 	import InitiateTx from '$components/keplr/InitiateTx.svelte';
-	import { onMount } from 'svelte';
 
 	// declare global {
 	// 	// eslint-disable-next-line @typescript-eslint/no-empty-interface

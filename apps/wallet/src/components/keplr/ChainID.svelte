@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { storeChainID } from '$lib/store';
+	import { storeChainID } from '$lib/keplr/store';
 	import { conf } from '$lib/config';
 
 	const chainIDChanged = (e: { target: HTMLSelectElement }) => {

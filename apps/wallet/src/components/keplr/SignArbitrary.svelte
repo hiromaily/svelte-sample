@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	//import { fromBase64 } from '@cosmjs/encoding';
-	import { updateKeplrAddress } from '$lib/address';
+	import { updateKeplrAddress } from '$lib/keplr/address';
 	import { conf } from '$lib/config';
-	import { storeChainID } from '$lib/store';
+	import { storeChainID } from '$lib/keplr/store';
 
 	// import { SigningCosmosClient } from '@cosmjs/launchpad';
 	// import { DirectSecp256k1HdWallet } from '@cosmjs/proto-signing';

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { conf } from '$lib/config';
 	import { createClientByMnemonic } from '$lib/cosmos/client';
-	import { storeClient } from '$lib/store';
+	import { storeClient } from '$lib/keplr/store';
 
 	// create client
 	(async () => {

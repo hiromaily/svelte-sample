@@ -9,7 +9,7 @@
 	<link rel="modulepreload" href="/wallet-demo-using-svelte/web/wallet/app/immutable/chunks/index-6e8b5e9e.js">
 	<link rel="modulepreload" href="/wallet-demo-using-svelte/web/wallet/app/immutable/chunks/index-5ea9d8bc.js">
 	<link rel="modulepreload" href="/wallet-demo-using-svelte/web/wallet/app/immutable/layout.svelte-0406ee6c.js">
-	<link rel="modulepreload" href="/wallet-demo-using-svelte/web/wallet/app/immutable/pages/index.svelte-88165870.js">
+	<link rel="modulepreload" href="/wallet-demo-using-svelte/web/wallet/app/immutable/pages/metamask.svelte-a81764df.js">
 	<link rel="modulepreload" href="/wallet-demo-using-svelte/web/wallet/app/immutable/chunks/Top-d7ef86f7.js">
 	</head>
 	<body>
@@ -24,13 +24,20 @@
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
 		<div class="collapse navbar-collapse" id="navbarNavAltMarkup"><div class="navbar-nav"><a class="nav-link active" aria-current="page" href="/wallet-demo-using-svelte/web/wallet/">Top</a>
 				<a class="nav-link" href="/wallet-demo-using-svelte/web/wallet/metamask">Metamask</a>
-				<a class="nav-link" href="/wallet-demo-using-svelte/web/wallet/keplr">Keplr</a></div></div></div></nav></div></div>
+				<a class="nav-link" href="/wallet-demo-using-svelte/web/wallet/keplr">Keplr</a></div></div></div></nav></div>
+	
+	<div class="mb-5"><h3 class="text-bg-primary p-3">Metamask Wallet</h3>
+	
+	<div class="mx-3 mt-4 row"><div class="mt-2"><button type="button" class="btn btn-primary" name="install" style="width: 150px;" >Install Metamask
+		</button></div>
+	<div class="mt-2"><button type="button" class="btn btn-primary" name="connect" style="width: 170px;" disabled>Connect Metamask
+		</button></div></div></div></div>
 
 
-		<script type="module" data-sveltekit-hydrate="rjg3aw">
+		<script type="module" data-sveltekit-hydrate="90vltj">
 		import { start } from "/wallet-demo-using-svelte/web/wallet/app/immutable/start-32bdd607.js";
 		start({
-			target: document.querySelector('[data-sveltekit-hydrate="rjg3aw"]').parentNode,
+			target: document.querySelector('[data-sveltekit-hydrate="90vltj"]').parentNode,
 			paths: {"base":"/wallet-demo-using-svelte/web/wallet","assets":"/wallet-demo-using-svelte/web/wallet"},
 			session: {},
 			route: true,
@@ -39,9 +46,9 @@
 			hydrate: {
 				status: 200,
 				error: null,
-				nodes: [0, 2],
+				nodes: [0, 4],
 				params: {},
-				routeId: ""
+				routeId: "metamask"
 			}
 		});
 	</script></div>

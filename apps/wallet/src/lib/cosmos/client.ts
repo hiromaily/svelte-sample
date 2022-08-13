@@ -3,7 +3,7 @@ import { Tendermint34Client } from '@cosmjs/tendermint-rpc';
 import type { AbciQueryParams } from '@cosmjs/tendermint-rpc/build/tendermint34/requests';
 import { SigningStargateClient } from '@cosmjs/stargate';
 import type { SigningStargateClientOptions } from '@cosmjs/stargate';
-import { getWallet } from '$lib/address';
+import { getWallet } from '$lib/keplr/address';
 //import { BroadcastMode, SigningCosmWasmClient } from 'secretjs';
 //import { SigningCosmosClient } from '@cosmjs/launchpad';
 //import type { OfflineSigner as OfflineAminoSigner } from '@cosmjs/launchpad';
