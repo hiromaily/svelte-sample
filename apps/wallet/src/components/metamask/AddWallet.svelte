@@ -15,12 +15,7 @@
 		});
 		storeChainID.subscribe((value) => {
 			chainID = value;
-			console.log(`chainID in addWallet subscribe: ${chainID}`);
 		});
-
-		// get current selected value
-		// const chid = (document?.getElementById('chainid') as HTMLSelectElement).value;
-		// if (chid) chainID = parseInt(chid, 10);
 	});
 
 	const chainIDChanged = (e: { target: HTMLSelectElement }) => {

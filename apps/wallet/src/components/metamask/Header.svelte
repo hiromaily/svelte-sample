@@ -32,10 +32,29 @@
 
 			// update store
 			storeMetamask.set(meta);
+
+			// if already connected
+			if (meta.isConnected()) await loadContents();
 		} else {
 			console.log('provider is not found');
 		}
 	});
+
+	const loadContents = async () => {
+		// address
+		const addrs = await meta.getAddress();
+		if (addrs) {
+			currentAddress = addrs[0];
+		}
+
+		// chainID (0x1)
+		chainID = await meta.chainID().then((res) => {
+			return parseInt(res, 16);
+		});
+
+		// update store
+		storeChainID.set(chainID);
+	};
 
 	const clickInstallMetamask = () => {
 		openExtension();
@@ -46,24 +65,7 @@
 		console.log(`account: ${account}`);
 		isConnected = true;
 
-		// chainID (0x1)
-		chainID = await meta.chainID().then((res) => {
-			return parseInt(res, 16);
-		});
-
-		console.log(`chainID: ${chainID}`);
-		if (chainIDMap[chainID]) networkName = chainIDMap[chainID];
-		// TODO: switch chainID select box using subscription
-
-		// address
-		const addr = await meta.getAddress();
-		if (addr) {
-			currentAddress = addr;
-		}
-
-		// update store
-		//storeIsConnected.set(true);
-		storeChainID.set(chainID);
+		await loadContents();
 	};
 </script>
 

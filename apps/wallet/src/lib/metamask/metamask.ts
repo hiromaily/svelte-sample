@@ -13,34 +13,39 @@ class Metamask {
 	// TODO: send transaction
 	// https://docs.metamask.io/guide/sending-transactions.html
 
+	// getAccount is equivalent to deprecated ethereum.enable()
 	public async getAccount(): Promise<string> {
 		// https://docs.metamask.io/guide/rpc-api.html#eth-requestaccounts
-		// this is equivalent to deprecated ethereum.enable()
 		const accounts = await this.provider.request({ method: 'eth_requestAccounts' });
 		return accounts[0];
 	}
 
+	// get chainID
 	public async chainID(): Promise<string> {
 		//https://docs.metamask.io/guide/ethereum-provider.html#ethereum-chainid-deprecated
 		return await this.provider.request({ method: 'eth_chainId' });
 	}
 
+	// get network version (would not use)
 	public async networkVersion(): Promise<number> {
 		// https://docs.metamask.io/guide/ethereum-provider.html#ethereum-networkversion-deprecated
 		//return this.provider.networkVersion; // 1
 		return await this.provider.request({ method: 'net_version' });
 	}
 
-	public async getAddress(): Promise<string | null> {
+	// get address array
+	public async getAddress(): Promise<string[] | null> {
 		// https://docs.metamask.io/guide/ethereum-provider.html#ethereum-selectedaddress-deprecated
 		//return this.provider.selectedAddress; // null
 		return await this.provider.request({ method: 'eth_accounts' });
 	}
 
+	// check current connection status
 	public isConnected(): boolean {
 		return this.provider.isConnected;
 	}
 
+	// add network if not added yet
 	// if network is already added, it automatically switch
 	public async addEthereumChain(chainID: number) {
 		// get chainParam
@@ -56,6 +61,7 @@ class Metamask {
 		});
 	}
 
+	// switch network
 	public async switchEthereumChain(chainID: number) {
 		//const chainIDStr = '0x' + chainID.toString(16).toUpperCase();
 		const chainIDStr = '0x' + chainID.toString(16);
@@ -66,6 +72,33 @@ class Metamask {
 		});
 	}
 
+	// Requests that the user tracks the token in MetaMask.
+	// Returns a boolean indicating if the token was successfully added.
+	public async watchAsset(token: string) {
+		this.provider
+			.request({
+				method: 'wallet_watchAsset',
+				params: {
+					type: 'ERC20',
+					options: {
+						address: '0xb60e8dd61c5d32be8058bb8eb970870f07233155',
+						symbol: 'FOO',
+						decimals: 18,
+						image: 'https://foo.io/token-image.svg'
+					}
+				}
+			})
+			.then((success: boolean) => {
+				if (success) {
+					console.log(`${token} was successfully added to wallet!`);
+				} else {
+					throw new Error('Something went wrong.');
+				}
+			})
+			.catch(console.error);
+	}
+
+	// set events
 	public readyEvent() {
 		// TODO: events
 		// https://docs.metamask.io/guide/ethereum-provider.html#events
