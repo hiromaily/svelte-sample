@@ -17,6 +17,7 @@ export const chainIDMap: ChainID = {
 	4: 'Rinkeby Test Network',
 	5: 'Goerli Test Network',
 	42: 'Kovan Test Network',
+	56: 'Binance Smart Chain Mainnet',
 	137: 'Polygon Mainnet',
 	11155111: 'Sepolia Test Network'
 };
@@ -70,5 +71,16 @@ export const chainIDParamMap: ChainIDParam = {
 			'https://rpc-mainnet.matic.quiknode.pro'
 		],
 		blockExplorerUrls: ['https://polygonscan.com/']
+	},
+	11155111: {
+		chainId: '0xaa36a7', // 11155111
+		chainName: 'Sepolia Test Network',
+		nativeCurrency: {
+			name: 'ETH',
+			symbol: 'ETH',
+			decimals: 18
+		},
+		rpcUrls: ['https://rpc.sepolia.dev'],
+		blockExplorerUrls: ['https://sepolia.etherscan.io/']
 	}
 };

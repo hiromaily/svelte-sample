@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { chainIDParamMap } from '$lib/metamask/chainid';
+	import { chainIDMap } from '$lib/metamask/chainid';
 	import type { Metamask } from '$lib/metamask/metamask';
-	import { storeMetamask } from '$lib/metamask/store';
+	import { storeMetamask, storeChainID } from '$lib/metamask/store';
 
 	let meta: Metamask;
 	let chainID = 0; //FIXME: set default number
@@ -13,10 +13,14 @@
 			if (!value) return;
 			meta = value;
 		});
+		storeChainID.subscribe((value) => {
+			chainID = value;
+			console.log(`chainID in addWallet subscribe: ${chainID}`);
+		});
 
 		// get current selected value
-		const chid = (document?.getElementById('chainid') as HTMLSelectElement).value;
-		if (chid) chainID = parseInt(chid, 10);
+		// const chid = (document?.getElementById('chainid') as HTMLSelectElement).value;
+		// if (chid) chainID = parseInt(chid, 10);
 	});
 
 	const chainIDChanged = (e: { target: HTMLSelectElement }) => {
@@ -25,7 +29,7 @@
 	};
 
 	const clickAddNetwork = async () => {
-		// add network
+		// add network or switch network
 		if (!chainID) {
 			alert(`chainID is invalid`);
 			return;
@@ -33,20 +37,23 @@
 		console.log(`chainID: ${chainID}`);
 		meta.addEthereumChain(chainID);
 	};
+
+	$: chainID_ = chainID.toString();
 </script>
 
 <div class="mx-3 mt-4 row">
 	<label for="chainid" class="col-sm-3 col-form-label">ChainID:</label>
 	<div class="col-sm-9">
 		<select
+			bind:value={chainID_}
 			on:change={chainIDChanged}
 			name="chainid"
 			id="chainid"
 			class="form-select"
 			aria-label="ChainID"
 		>
-			{#each Object.entries(chainIDParamMap) as [key, value], index (key)}
-				<option value={key}>{value.chainName}</option>
+			{#each Object.entries(chainIDMap) as [key, value], index (key)}
+				<option value={key}>{value}</option>
 			{/each}
 		</select>
 	</div>

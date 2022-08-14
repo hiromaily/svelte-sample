@@ -9,4 +9,8 @@ const stripHexPrefix = (str: string): string => {
 	return str.slice(0, 2) === '0x' ? str.slice(2) : str;
 };
 
-export { decodeHexString };
+const toDecimal = (hex: number): number => {
+	return parseInt(hex.toString(), 16);
+};
+
+export { decodeHexString, toDecimal };

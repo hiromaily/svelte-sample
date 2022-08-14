@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import { Metamask, isMetamaskInstalled, openExtension } from '$lib/metamask/metamask';
 	import { chainIDMap } from '$lib/metamask/chainid';
-	import { storeMetamask, storeIsConnected } from '$lib/metamask/store';
+	import { storeMetamask, storeChainID } from '$lib/metamask/store';
 
 	let meta: Metamask;
 	// UI related
@@ -13,6 +13,12 @@
 	let currentAddress = '';
 
 	onMount(async () => {
+		// subscribe
+		storeChainID.subscribe((value) => {
+			chainID = value;
+			if (chainIDMap[chainID]) networkName = chainIDMap[chainID];
+		});
+
 		const provider = await isMetamaskInstalled();
 		if (provider) {
 			// From now on, this should always be true:
@@ -21,6 +27,8 @@
 			isInstalled = true;
 			// create
 			meta = new Metamask(provider);
+			// register event
+			meta.readyEvent();
 
 			// update store
 			storeMetamask.set(meta);
@@ -38,21 +46,24 @@
 		console.log(`account: ${account}`);
 		isConnected = true;
 
-		// update store
-		storeIsConnected.set(true);
-
 		// chainID (0x1)
-		const chainIDStr = await meta.chainID();
-		chainID = parseInt(chainIDStr, 16);
+		chainID = await meta.chainID().then((res) => {
+			return parseInt(res, 16);
+		});
 
 		console.log(`chainID: ${chainID}`);
 		if (chainIDMap[chainID]) networkName = chainIDMap[chainID];
+		// TODO: switch chainID select box using subscription
 
 		// address
 		const addr = await meta.getAddress();
 		if (addr) {
 			currentAddress = addr;
 		}
+
+		// update store
+		//storeIsConnected.set(true);
+		storeChainID.set(chainID);
 	};
 </script>
 

@@ -1,5 +1,8 @@
 import detectEthereumProvider from '@metamask/detect-provider';
 import { chainIDParamMap } from '$lib/metamask/chainid';
+import { storeChainID } from '$lib/metamask/store';
+import { toDecimal } from '$lib/hex/hex';
+
 class Metamask {
 	private provider: any;
 
@@ -38,16 +41,28 @@ class Metamask {
 		return this.provider.isConnected;
 	}
 
+	// if network is already added, it automatically switch
 	public async addEthereumChain(chainID: number) {
 		// get chainParam
 		if (!chainIDParamMap[chainID]) {
-			console.log(`chainID: ${chainID} is not defined`);
+			// switch chain
+			await this.switchEthereumChain(chainID);
 			return;
 		}
 
 		await this.provider.request({
 			method: 'wallet_addEthereumChain',
 			params: [chainIDParamMap[chainID]]
+		});
+	}
+
+	public async switchEthereumChain(chainID: number) {
+		//const chainIDStr = '0x' + chainID.toString(16).toUpperCase();
+		const chainIDStr = '0x' + chainID.toString(16);
+
+		await this.provider.request({
+			method: 'wallet_switchEthereumChain',
+			params: [{ chainId: chainIDStr }]
 		});
 	}
 
@@ -63,7 +78,12 @@ class Metamask {
 			// Handle the new chain.
 			// Correctly handling chain changes can be complicated.
 			// We recommend reloading the page unless you have good reason not to.
-			window.location.reload();
+			//window.location.reload();
+
+			// convert
+			const chainId_ = toDecimal(chainId);
+			console.log(`event[chainChanged] decimal: ${chainId}`);
+			storeChainID.set(chainId_);
 		});
 	}
 }
