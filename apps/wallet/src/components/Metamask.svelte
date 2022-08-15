@@ -3,10 +3,10 @@
 	import Header from '$components/metamask/Header.svelte';
 	import AddWallet from '$components/metamask/AddWallet.svelte';
 	import type { Metamask } from '$lib/metamask/metamask';
-	import { storeMetamask, storeChainID } from '$lib/metamask/store';
+	import { storeMetamask, storeIsConnected } from '$lib/metamask/store';
 
 	let meta: Metamask | undefined;
-	let chainID = 0;
+	let isConnected = false;
 
 	// https://svelte.dev/tutorial/onmount
 	// - onMount, which runs after the component is first rendered to the DOM
@@ -24,8 +24,8 @@
 			if (!value) return;
 			meta = value;
 		});
-		storeChainID.subscribe((value) => {
-			chainID = value;
+		storeIsConnected.subscribe((value) => {
+			isConnected = value;
 		});
 	});
 </script>
@@ -34,7 +34,7 @@
 	<h3 class="text-bg-primary p-3">Metamask Wallet</h3>
 	<!-- Header component -->
 	<Header />
-	{#if meta && chainID}
+	{#if meta && isConnected}
 		<!-- AddWallet component -->
 		<AddWallet />
 	{/if}

@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import { Metamask, isMetamaskInstalled, openExtension } from '$lib/metamask/metamask';
 	import { chainIDMap } from '$lib/metamask/chainid';
-	import { storeMetamask, storeChainID } from '$lib/metamask/store';
+	import { storeMetamask, storeIsConnected, storeChainID } from '$lib/metamask/store';
 
 	let meta: Metamask;
 	// UI related
@@ -43,8 +43,11 @@
 	const loadContents = async () => {
 		// address
 		const addrs = await meta.getAddress();
-		if (addrs) {
+		// Note: if not connected, address would be just []
+		if (addrs && addrs.length != 0) {
 			currentAddress = addrs[0];
+			isConnected = true;
+			storeIsConnected.set(isConnected);
 		}
 
 		// chainID (0x1)
@@ -63,7 +66,6 @@
 	const clickConnectMetamask = async () => {
 		const account = await meta.getAccount();
 		console.log(`account: ${account}`);
-		isConnected = true;
 
 		await loadContents();
 	};

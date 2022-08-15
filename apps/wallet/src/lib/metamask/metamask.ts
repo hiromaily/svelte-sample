@@ -1,4 +1,5 @@
 import detectEthereumProvider from '@metamask/detect-provider';
+import MetaMaskOnboarding from '@metamask/onboarding';
 import { chainIDParamMap } from '$lib/metamask/chainid';
 import { storeChainID } from '$lib/metamask/store';
 import { toDecimal } from '$lib/hex/hex';
@@ -134,9 +135,11 @@ const isMetamaskInstalled = async (): Promise<unknown | undefined> => {
 };
 
 const openExtension = () => {
-	const link =
-		'https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn/related';
-	window.open(link);
+	// const link =
+	// 	'https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn/related';
+	// window.open(link);
+	const onboarding = new MetaMaskOnboarding();
+	onboarding.startOnboarding();
 };
 
 export { Metamask, isMetamaskInstalled, openExtension };

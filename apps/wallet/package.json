@@ -46,6 +46,7 @@
 		"@cosmjs/stargate": "^0.28.10",
 		"@cosmjs/tendermint-rpc": "^0.28.11",
 		"@metamask/detect-provider": "^1.2.0",
+		"@metamask/onboarding": "^1.0.1",
 		"@types/long": "^4.0.2",
 		"map-obj": "^5.0.2",
 		"protobufjs": "^6.11.3",
