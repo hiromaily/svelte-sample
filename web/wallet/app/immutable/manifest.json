@@ -1,6 +1,6 @@
 {
   ".svelte-kit/runtime/client/start.js": {
-    "file": "start-f82659e4.js",
+    "file": "start-fbbd4f80.js",
     "src": ".svelte-kit/runtime/client/start.js",
     "isEntry": true,
     "imports": [
@@ -58,7 +58,7 @@
     ]
   },
   "src/routes/metamask.svelte": {
-    "file": "pages/metamask.svelte-3912c3c7.js",
+    "file": "pages/metamask.svelte-91b57e52.js",
     "src": "src/routes/metamask.svelte",
     "isEntry": true,
     "isDynamicEntry": true,

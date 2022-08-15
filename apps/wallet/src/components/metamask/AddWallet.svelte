@@ -30,7 +30,10 @@
 			return;
 		}
 		console.log(`chainID: ${chainID}`);
-		meta.addEthereumChain(chainID);
+		await meta.addEthereumChain(chainID).catch((err) => {
+			console.error(err);
+			alert(`failed to add chain: ${chainID}`);
+		});
 	};
 
 	$: chainID_ = chainID.toString();

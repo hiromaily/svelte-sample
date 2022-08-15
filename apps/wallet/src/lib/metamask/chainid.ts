@@ -19,7 +19,7 @@ export const chainIDMap: ChainID = {
 	42: 'Kovan Test Network',
 	56: 'Binance Smart Chain Mainnet',
 	137: 'Polygon Mainnet',
-	11155111: 'Sepolia Test Network'
+	//11155111: 'Sepolia Test Network'
 };
 
 interface AddEthereumChainParameter {
@@ -72,15 +72,15 @@ export const chainIDParamMap: ChainIDParam = {
 		],
 		blockExplorerUrls: ['https://polygonscan.com/']
 	},
-	11155111: {
-		chainId: '0xaa36a7', // 11155111
-		chainName: 'Sepolia Test Network',
-		nativeCurrency: {
-			name: 'ETH',
-			symbol: 'ETH',
-			decimals: 18
-		},
-		rpcUrls: ['https://rpc.sepolia.dev'],
-		blockExplorerUrls: ['https://sepolia.etherscan.io/']
-	}
+	// 11155111: {
+	// 	chainId: '0xaa36a7', // 11155111
+	// 	chainName: 'Sepolia Test Network',
+	// 	nativeCurrency: {
+	// 		name: 'SEP',
+	// 		symbol: 'SEP',
+	// 		decimals: 18
+	// 	},
+	// 	rpcUrls: ['https://nunki.htznr.fault.dev/rpc', 'https://rpc.sepolia.dev', 'https://rpc.sepolia.online', 'https://www.sepoliarpc.space', 'https://rpc.sepolia.org', 'https://rpc-sepolia.rockx.com'],
+	// 	blockExplorerUrls: ['https://sepolia.etherscan.io/']
+	// }
 };
