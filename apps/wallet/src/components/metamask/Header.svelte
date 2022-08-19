@@ -4,7 +4,7 @@
 	import { chainIDMap } from '$lib/metamask/chainid';
 	import { storeMetamask, storeIsConnected, storeChainID } from '$lib/metamask/store';
 
-	let meta: Metamask;
+	let meta: Metamask | undefined;
 	// UI related
 	let isInstalled = false;
 	let isConnected = false;
@@ -42,7 +42,7 @@
 
 	const loadContents = async () => {
 		// address
-		const addrs = await meta.getAddress();
+		const addrs = await meta?.getAddress();
 		// Note: if not connected, address would be just []
 		if (addrs && addrs.length != 0) {
 			currentAddress = addrs[0];
@@ -51,9 +51,10 @@
 		}
 
 		// chainID (0x1)
-		chainID = await meta.chainID().then((res) => {
-			return parseInt(res, 16);
-		});
+		chainID =
+			(await meta?.chainID().then((res) => {
+				return parseInt(res, 16);
+			})) ?? 0;
 
 		// update store
 		storeChainID.set(chainID);
@@ -64,7 +65,7 @@
 	};
 
 	const clickConnectMetamask = async () => {
-		const account = await meta.getAccount();
+		const account = await meta?.getAccount();
 		console.log(`account: ${account}`);
 
 		await loadContents();

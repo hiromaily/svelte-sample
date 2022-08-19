@@ -4,7 +4,7 @@
 	import type { Metamask } from '$lib/metamask/metamask';
 	import { storeMetamask, storeChainID } from '$lib/metamask/store';
 
-	let meta: Metamask;
+	let meta: Metamask | undefined;
 	let chainID = 0; //FIXME: set default number
 
 	onMount(async () => {
@@ -30,7 +30,7 @@
 			return;
 		}
 		console.log(`chainID: ${chainID}`);
-		await meta.addEthereumChain(chainID).catch((err) => {
+		await meta?.addEthereumChain(chainID).catch((err) => {
 			console.error(err);
 			alert(`failed to add chain: ${chainID}`);
 		});
